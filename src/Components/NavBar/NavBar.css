@@ -1,0 +1,9 @@
+.logo_navbar {
+    margin-top: 150px;
+    width: auto;
+}
+@media (max-width: 1000px) {
+    .logo_navbar{
+        width: 400px;
+    }
+}
