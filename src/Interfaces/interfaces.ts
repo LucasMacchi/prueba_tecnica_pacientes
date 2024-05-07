@@ -1,5 +1,6 @@
 export type TMenuOptions = "login" | "logout" | false 
 export type TtypeAlert = "success" | "info" | "error" | "warning"
+export type TNavigate = "home" | "pacients"
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export interface IPaciente {

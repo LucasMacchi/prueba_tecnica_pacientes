@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter, Route, Routes} from "react-router-dom"
 
 //Estados
 import GlobalState from './Context/Global/GlobalState';
@@ -18,15 +19,17 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <ThemeProvider theme={theme}>
-    <GlobalState>
-      <PacientesState>
-        <React.StrictMode>
-          <App />
-          
-        </React.StrictMode>
-      </PacientesState>
-    </GlobalState>
-  </ThemeProvider>
+    <BrowserRouter>
+      <GlobalState>
+        <PacientesState>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </PacientesState>
+      </GlobalState>
+    </BrowserRouter>
+
+</ThemeProvider>
 
 );
 

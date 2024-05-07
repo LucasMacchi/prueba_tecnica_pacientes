@@ -4,7 +4,7 @@ import Typeography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton'
-
+import { useNavigate   } from 'react-router-dom';
 //Components
 import Alerta from '../Others/Alert';
 
@@ -15,9 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import GroupsIcon from '@mui/icons-material/Groups';
 
-//Transitions
-import Zoom from '@mui/material/Zoom';
-import Slide from '@mui/material/Slide';
+import { TNavigate } from '../../Interfaces/interfaces';
 
 //css
 import "./NavBar.css"
@@ -28,6 +26,8 @@ import { GlobalContext } from '../../Context/Contexts';
 export default function NavBar () {
 
     const global = useContext(GlobalContext)
+
+    const navigation = useNavigate()
 
     const [page, changePage] = useState(0)
 
@@ -70,34 +70,23 @@ export default function NavBar () {
 
         }
     }
-    //Si no esta logeado mostrara texto diciendo que es requerido logearse
-    const notLog = () => {
-        if(!global?.isLogged){
-            return(
-                <Box sx={{textAlign: "center"}}>
-                    <Zoom in={true} style={{transitionDelay: '200ms'}}>{<Typeography sx={{ typography: { sm: 'h2', xs: 'h6' } }}>Usted no ha Ingresado al Sistema.</Typeography>}</Zoom>
-                    <Zoom in={true} style={{transitionDelay: '500ms'}}>{<Typeography sx={{ typography: { sm: 'h6', xs: 'body1' } }}>Porfavor, ingrese para ver los pacientes.</Typeography>}</Zoom>
-                    <Slide direction="up" in={true} mountOnEnter unmountOnExit >{<img src='/icc_logo_extended.png' alt='icc' className='logo_navbar'/>}</Slide>
-                    
-                </Box>
-            )
-        }
-    }
+
     //Una vez logeados, podran ir a la seccion de inicio o pacientes.
     const showNavigation = () => {
         if(global?.isLogged){
             return(
                 <Box marginLeft={{sm:"50px", xs: "3px"}}>
-                    <Button sx={{marginRight: {sm:"35px", xs: "5px"}}} color='secondary' variant='text' size='large'>
+                    <Button onClick={() => navigation("/home")} sx={{marginRight: {sm:"35px", xs: "5px"}}} color='secondary' variant='text' size='large'>
                         <Typeography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Inicio</Typeography>
                     </Button>
-                    <Button color='secondary' variant='text' size='large' endIcon={<GroupsIcon fontSize='large'/>}>
+                    <Button onClick={() => navigation("/pacients")} color='secondary' variant='text' size='large' endIcon={<GroupsIcon fontSize='large'/>}>
                         <Typeography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Pacientes</Typeography>
                     </Button>
                 </Box>
             )
         }
     }
+
 
     return(
         <Box>
@@ -112,7 +101,6 @@ export default function NavBar () {
                 </Toolbar>
             </AppBar>
             {alerta()}
-            {notLog()}
             
         </Box>
     )
