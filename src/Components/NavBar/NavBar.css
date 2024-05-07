@@ -7,3 +7,9 @@
         width: 400px;
     }
 }
+@media (max-width: 399px){
+    .logo_navbar{
+        content: url(/public/logo_icc_small.jpg);
+        width: 100px;
+    }
+}

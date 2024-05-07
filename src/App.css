@@ -8,3 +8,7 @@
     position: absolute;
     bottom: 0;
 }
+.alert {
+    display: flex;
+    justify-content: center;
+}

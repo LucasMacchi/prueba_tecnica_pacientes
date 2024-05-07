@@ -1,0 +1,19 @@
+{
+    "cuentas": [
+        {
+            "username":"Dr Ricardo Gomez",
+            "email":"ricardo@gmail.com",
+            "password":"123456"
+        },
+        {
+            "username":"Dr Martin Macchi",
+            "email":"macchi@gmail.com",
+            "password":"2001"
+        },
+        {
+            "username":"Dra Maria",
+            "email":"maria@gmail.com",
+            "password":"maria123"
+        }
+    ]
+}

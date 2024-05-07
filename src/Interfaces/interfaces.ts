@@ -1,19 +1,26 @@
-export type TMenuOptions = "login" | false 
+export type TMenuOptions = "login" | "logout" | false 
+export type TtypeAlert = "success" | "info" | "error" | "warning"
+
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export interface IPaciente {
     nombre: string,
     apellido: string,
     dni: number,
     localidad: string,
-    nacimiento: Date,
+    nacimiento: string,
     antecedentes: string,
-    edad: number,
     alergias: string
 }
 
 export interface IUser {
     username: string,
     email: string,
+    password?: string
+}
+
+export interface IUserLogin {
+    email: string,
+    password: string
 }
 
 export interface IPacientesState{
@@ -26,9 +33,14 @@ export interface IPacientesState{
 
 export interface IGlobalState {
     menu: TMenuOptions
-    isLogged: true | false,
-    user: IUser
-    changeMenu: (type: TMenuOptions) => void
+    isLogged: boolean,
+    user: IUser,
+    alert: IAlert,
+    setAlert: (status: boolean, msg: string, type: TtypeAlert) => void
+    changeMenu: (type: TMenuOptions) => void,
+    login: (user: IUserLogin, remember: boolean) => boolean,
+    autoLogin: () => void
+    logout: () => void
 }
 
 export interface IAction{
@@ -42,4 +54,10 @@ export interface IPropsChildren {
 
 export interface IMenuSelection {
     type: "login"
+}
+
+export interface IAlert {
+    alert_status : boolean,
+    alert_msg : string,
+    alert_type: TtypeAlert
 }

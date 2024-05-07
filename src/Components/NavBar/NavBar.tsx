@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton'
 
 //Components
-import Menu from '../Menu/Menu';
+import Alerta from '../Others/Alert';
 
 //Icons
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -31,18 +31,33 @@ export default function NavBar () {
 
     const [page, changePage] = useState(0)
 
-
+    //Buton para logearse a la pagina
     const loginBtn = () => {
         global?.changeMenu("login")
     }
 
+    //Buton para deslogearse de la pagina
+    const logoutBtn = () => {
+        global?.changeMenu("logout")
+    }
+
+    //Crea alerta y en 8 segundos desaparece
+    const alerta = () => {
+        
+        setTimeout(() => {
+          global?.setAlert(false, "", "info")
+        }, 8000);
+        
+        if(global?.alert.alert_status) return (<Alerta/>)
+      }
+    //Esta funcion mostrara o el boton para ingresar o informacion del usuario, dependiendo de si esta logeado o no
     const profile = () => {
         if (global?.isLogged){
             return (
                 <Box sx={{display: "flex"}}>
                     <AccountBoxIcon fontSize='large' sx={{marginTop:"2px", display: {sm:"block", xs: "none"}}}/>
                     <Typeography sx={{ typography: { sm: 'h4', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typeography>
-                    <IconButton aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
+                    <IconButton onClick={() => logoutBtn()} aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
                 </Box>
             )
         }
@@ -55,12 +70,12 @@ export default function NavBar () {
 
         }
     }
-
+    //Si no esta logeado mostrara texto diciendo que es requerido logearse
     const notLog = () => {
         if(!global?.isLogged){
             return(
                 <Box sx={{textAlign: "center"}}>
-                    <Zoom in={true} style={{transitionDelay: '200ms'}}>{<Typeography sx={{ typography: { sm: 'h2', xs: 'h6' } }}>Usted no a Ingresado al Sistema.</Typeography>}</Zoom>
+                    <Zoom in={true} style={{transitionDelay: '200ms'}}>{<Typeography sx={{ typography: { sm: 'h2', xs: 'h6' } }}>Usted no ha Ingresado al Sistema.</Typeography>}</Zoom>
                     <Zoom in={true} style={{transitionDelay: '500ms'}}>{<Typeography sx={{ typography: { sm: 'h6', xs: 'body1' } }}>Porfavor, ingrese para ver los pacientes.</Typeography>}</Zoom>
                     <Slide direction="up" in={true} mountOnEnter unmountOnExit >{<img src='/icc_logo_extended.png' alt='icc' className='logo_navbar'/>}</Slide>
                     
@@ -68,7 +83,7 @@ export default function NavBar () {
             )
         }
     }
-
+    //Una vez logeados, podran ir a la seccion de inicio o pacientes.
     const showNavigation = () => {
         if(global?.isLogged){
             return(
@@ -96,6 +111,7 @@ export default function NavBar () {
                     {profile()}
                 </Toolbar>
             </AppBar>
+            {alerta()}
             {notLog()}
             
         </Box>
