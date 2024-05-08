@@ -1,15 +1,27 @@
-export type TMenuOptions = "login" | "logout" | false 
+export type TMenuOptions = "login" | "logout" | "addPacient" | "editPacient" | false 
 export type TtypeAlert = "success" | "info" | "error" | "warning"
 export type TNavigate = "home" | "pacients"
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+export const nameRegex: RegExp= /^[A-Za-z ñ]+$/;
+export const numbersRegex: RegExp = /^[0-9]{8}$/;
+export const daysMonthsRegex: RegExp = /^(?!0)[0-9]{1,2}$/;
+export const yearsRegex: RegExp = /^[0-9]{4}$/;
+
 export interface IPaciente {
     nombre: string,
     apellido: string,
     dni: number,
     localidad: string,
     nacimiento: string,
-    antecedentes: string,
+    alergias: string
+}
+export interface IPacienteCreate {
+    nombre: string,
+    apellido: string,
+    dni: string,
+    localidad: string,
+    nacimiento: string,
     alergias: string
 }
 
@@ -26,10 +38,13 @@ export interface IUserLogin {
 
 export interface IPacientesState{
     pacientes: IPaciente[],
-    getAllPacients: () => IPaciente[],
+    pacient_edit_dni: number,
+    getAllPacients: () => void,
     getDeletePacient: (dni: number) => boolean,
-    getAddPacient: () => boolean,
-    getEditPacient: (dni: number) => void
+    getAddPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
+    getEditPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
+    getPacient: (dni: number, pacientTotal: IPaciente[]) => IPaciente | void,
+    setDniEdit: (dni: number) => void
 }
 
 export interface IGlobalState {

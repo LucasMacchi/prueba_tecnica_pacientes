@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Divider from '@mui/material/Divider';
 
 //icons
 import LoginIcon from '@mui/icons-material/Login';
@@ -101,7 +102,8 @@ export default function LoginMenu () {
             <Box display={ 'flex'} justifyContent={"space-between"}>
                 <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='h6'>INGRESAR</Typography> 
             </Box>
-            <Box>
+            <Divider/>
+            <Box marginTop={"10px"}>
             <Box>
                 <Box>
                     <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={"Email"} color="secondary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>

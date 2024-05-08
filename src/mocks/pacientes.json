@@ -6,7 +6,6 @@
             "dni":43166083,
             "localidad":"Santa Ana",
             "nacimiento":"10/10/2000",
-            "antecedentes":"No tiene antecedentes de enfermedades",
             "alergias": ""
         },
         {
@@ -15,7 +14,6 @@
             "dni":42266143,
             "localidad":"Bella Vista",
             "nacimiento":"5/4/1996",
-            "antecedentes":"No tiene antecedentes de enfermedades",
             "alergias": ""
         },
         {
@@ -24,7 +22,6 @@
             "dni":41266071,
             "localidad":"Capital",
             "nacimiento":"1/6/1999",
-            "antecedentes":"No tiene antecedentes de enfermedades",
             "alergias": "Polen"
         },
         {
@@ -33,7 +30,6 @@
             "dni":40166091,
             "localidad":"San Roque",
             "nacimiento":"7/1/2001",
-            "antecedentes":"Padre hipertenso",
             "alergias":""
         },
         {
@@ -42,7 +38,6 @@
             "dni":37566045,
             "localidad":"Capital",
             "nacimiento":"6/4/1995",
-            "antecedentes":"No tiene antecedentes de enfermedades",
             "alergias": ""
         },
         {
@@ -51,7 +46,6 @@
             "dni": 41822456,
             "localidad": "Resistencia",
             "nacimiento": "24/5/2000",
-            "antecedentes":"Madre tuvo cancer de mama",
             "alergias": "Penencilina"
         },
         {
@@ -60,7 +54,6 @@
             "dni": 42944074,
             "localidad":"Capital",
             "nacimiento":"9/8/2000",
-            "antecedentes":"Madre tuvo cancer de mama",
             "alergias": "Polen"
         },
         {
@@ -69,7 +62,6 @@
             "dni":39466848,
             "localidad":"Esquina",
             "nacimiento":"26/12/2000",
-            "antecedentes":"Problemas de oido",
             "alergias": ""
         },
         {
@@ -78,7 +70,6 @@
             "dni":43522125,
             "localidad":"Capital",
             "nacimiento":"10/8/2001",
-            "antecedentes":"No tiene antecedentes de enfermedades",
             "alergias": ""
         }
 

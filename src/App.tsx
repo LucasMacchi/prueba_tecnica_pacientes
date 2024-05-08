@@ -1,5 +1,5 @@
 import Bottom from './Components/Bottom/Bottom';
-import {BrowserRouter, Route, Routes} from "react-router-dom"
+import { Route, Routes} from "react-router-dom"
 
 import './App.css';
 
@@ -12,14 +12,16 @@ import Pacients from './Components/Pacients/Pacients';
 
 //Context
 import { useContext, useEffect } from 'react';
-import { GlobalContext } from './Context/Contexts';
+import { GlobalContext, PacienteContext } from './Context/Contexts';
 
 export default function App() {
 
   const global = useContext(GlobalContext)
+  const pacientes = useContext(PacienteContext)
 
   useEffect(() => {
     global?.autoLogin()
+    pacientes?.getAllPacients()
   },[])
 
   return (

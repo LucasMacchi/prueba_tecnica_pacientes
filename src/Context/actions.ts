@@ -5,6 +5,8 @@ export default {
     PACIENT_ADD : "pacients_add",
     PACIENT_EDIT: "pacients_edit",
     PACIENT_DELETE: "pacients_delete",
+    GET_PACIENT: "pacient_get",
+    DNI_EDIT_PACIENT: "pacient_dni_edit",
     GLOBAL_MENU: "global_menu",
     GLOBAL_LOGIN: "global_login",
     GLOBAL_LOGOUT: "global_logout",

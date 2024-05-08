@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton'
 //Components
 import LoginMenu from './Login';
 import LogoutMenu from './Logout';
+import AddMenu from './Add';
 
 //icons
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -31,6 +32,7 @@ export default function Menu () {
     const typeOfMenu = () => {
         if(global?.menu === "login") return (<LoginMenu/>)
         else if (global?.menu === "logout") return (<LogoutMenu/>)
+        else if (global?.menu === "addPacient" || global?.menu === "editPacient") return(<AddMenu/>)
     }
     //Funcion que devuelve un boleano que cierra o abre el menu
     const menuOpener = () => {
@@ -49,7 +51,7 @@ export default function Menu () {
                     </Box>
                     <IconButton onClick={() => closeBtn()} aria-label='close'><CloseIcon color='primary'/></IconButton>
                 </Box>
-                <Box width={300} padding={1}>
+                <Box width={320} padding={1}>
                     {typeOfMenu()}
                 </Box>
             </Paper>

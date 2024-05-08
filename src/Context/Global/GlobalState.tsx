@@ -35,7 +35,6 @@ export default function GlobalState(props: IPropsChildren){
     //Esta funcion se encargara del login, si no encuentra un usuario que coincida devolvera falso
     // LA CONTRASEÑA DEBERIA ESTAR ENCRIPTADA SI SE USA UN SERVIDOR!!
     const login =  (userToLog: IUserLogin, remember: boolean): boolean => {
-        console.log("USER EMAIL = ", userToLog.email + " | USER PASSWORD = ",userToLog.password)
         const userArray: IUser[] = JsonConverterUsers()
         let user: IUser = {username: "", email: ""}
         userArray.forEach(u => {
@@ -107,6 +106,7 @@ export default function GlobalState(props: IPropsChildren){
         logout,
         setAlert,
         autoLogin
+
     }
     const [state, dispatch] = useReducer(globalReducer, initialState)
 
