@@ -6,6 +6,7 @@ export type Torder = "asc" | "des"
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const nameRegex: RegExp= /^[A-Za-z ñ]+$/;
 export const numbersRegex: RegExp = /^[0-9]{8}$/;
+export const numbersNoLimitRegex: RegExp = /^[0-9]{1,8}$/;
 export const daysMonthsRegex: RegExp = /^(?!0)[0-9]{1,2}$/;
 export const yearsRegex: RegExp = /^[0-9]{4}$/;
 
@@ -52,6 +53,7 @@ export interface IPacientesState{
     setDniEdit: (dni: number) => void,
     setPagination: (pacientTotal: IPaciente[]) =>void,
     changeOrder: (order: Torder, pacientTotal: IPaciente[]) => void,
+    filter: (pacientTotal: IPaciente[], isNumber: boolean, search: string) => void
 }
 
 export interface IGlobalState {

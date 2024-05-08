@@ -9,6 +9,7 @@ import Menu from './Components/Menu/Menu';
 import HomeNotLog from './Components/Home/HomeNotLog';
 import Home from './Components/Home/Home';
 import Pacients from './Components/Pacients/Pacients';
+import Alerta from './Components/Others/Alert';
 
 //Context
 import { useContext, useEffect } from 'react';
@@ -41,6 +42,7 @@ export default function App() {
         {global?.isLogged ? <Bottom/> : ""}
       </div>
       {global?.menu ? <Menu/> : ""}
+      <Alerta/>
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default {
     DETAILS_PACIENT: "pacient_details",
     PAGINATED_PACIENTS: "pacients_paginated",
     ORDER_PACIENTS: "order_pacients",
+    FILTER_PACIENTS: "filter_pacients",
     GLOBAL_MENU: "global_menu",
     GLOBAL_LOGIN: "global_login",
     GLOBAL_LOGOUT: "global_logout",

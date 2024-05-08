@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton'
 import {useNavigate} from 'react-router-dom';
 //Components
-import Alerta from '../Others/Alert';
 
 //Icons
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -37,15 +36,6 @@ export default function NavBar () {
         global?.changeMenu("logout")
     }
 
-    //Crea alerta y en 8 segundos desaparece
-    const alerta = () => {
-        
-        setTimeout(() => {
-          global?.setAlert(false, "", "info")
-        }, 8000);
-        
-        if(global?.alert.alert_status) return (<Alerta/>)
-      }
     //Esta funcion mostrara o el boton para ingresar o informacion del usuario, dependiendo de si esta logeado o no
     const profile = () => {
         if (global?.isLogged){
@@ -96,7 +86,6 @@ export default function NavBar () {
                     {profile()}
                 </Toolbar>
             </AppBar>
-            {alerta()}
             
         </Box>
     )

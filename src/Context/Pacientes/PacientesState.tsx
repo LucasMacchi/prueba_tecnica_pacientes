@@ -144,7 +144,7 @@ export default function PacientesState(props: IPropsChildren ) {
             payload: paginated
         })
     }
-
+    //Cambia el orden alfabetico
     const changeOrder = (order: Torder, pacientTotal: IPaciente[]) => {
         const sorted = pacientSort(pacientTotal, order)
         dispatch({
@@ -152,6 +152,23 @@ export default function PacientesState(props: IPropsChildren ) {
             payload: {order, sorted}
         })
         setPagination(state.pacientes)
+    }
+    //Filtro 
+    const filter = (pacientTotal: IPaciente[], isNumber: boolean, search: string) => {
+        
+        if(isNumber){
+            const filteredArray = pacientTotal.filter(p => (p.dni).toString().includes(search))
+            if(filteredArray){
+                setPagination(filteredArray)
+            }
+        }
+        else{
+            const filteredArray = pacientTotal.filter(p => p.apellido.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || p.nombre.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
+            setPagination(filteredArray)
+            if(filteredArray){
+                setPagination(filteredArray)
+            }
+        }
     }
 
     //Estado Inicial del Estado
@@ -169,7 +186,8 @@ export default function PacientesState(props: IPropsChildren ) {
         setDniEdit,
         getPacientDetails,
         setPagination,
-        changeOrder
+        changeOrder,
+        filter
     }
 
     const [state, dispatch] = useReducer(pacientsReducer, initialState)

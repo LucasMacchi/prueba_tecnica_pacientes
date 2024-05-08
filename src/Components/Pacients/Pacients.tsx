@@ -3,15 +3,26 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import DataTable from './Table';
 import Typography from '@mui/material/Typography'
+import TextField from '@mui/material/TextField';
+import { red } from "@mui/material/colors";
+import { TtypeAlert, nameRegex, numbersNoLimitRegex } from '../../Interfaces/interfaces';
+import Button from '@mui/material/Button';
 
-
+//icons
+import SearchIcon from '@mui/icons-material/Search';
 
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext, PacienteContext } from '../../Context/Contexts';
 
 export default function Pacients () {
+
     const global = useContext(GlobalContext)
+
     const pacientCon = useContext(PacienteContext)
+
+    const [search, setSearch] = useState("")
+
+    const tableColor = red[500]
 
     const fabStyle = {
         position: 'absolute',
@@ -19,23 +30,51 @@ export default function Pacients () {
         right: 16,
     };
 
+
     const addBtn = () => {
         global?.changeMenu("addPacient")
     }
+
+    useEffect(() => {
+        if(!search) pacientCon?.setPagination(pacientCon.pacientes)
+        if(numbersNoLimitRegex.test(search)){
+            pacientCon?.filter(pacientCon.pacientes, true, search)
+        }
+        else if(nameRegex.test(search)) {
+            pacientCon?.filter(pacientCon.pacientes, false, search)
+
+        }
+
+    },[search])
+
+    const alertFn = (type: TtypeAlert, msg: string) => {
+        global?.setAlert(true, msg, type)
+    }
     
     const noPacients = () => {
-        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No tienes pacientes.</Typography>)
+        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No se encuentran pacientes.</Typography>)
         else return (<DataTable/>)
     }
 
     return(
-        <Box display={"flex"} justifyContent={"center"}>
-            <Box display={"flex"} justifyContent={"center"} maxWidth={{ sm: '800px', xs: '350px' }} marginTop={"20px"} >
-                {noPacients()}
+        <Box>
+            <Typography textAlign={"center"} style={{backgroundColor: tableColor}} color={"secondary"} variant='h4'>Buscar Pacientes</Typography>
+            <Box display={"flex"} justifyContent={"center"} style={{backgroundColor: tableColor}}>
+                <Box  padding={2} width={"500px"}>
+                    <TextField color='secondary' label="Ingrese el nombre o DNI" fullWidth variant="outlined"
+                    value={search} onChange={(e) => setSearch(e.target.value)}/>
+                </Box>
             </Box>
-            <Fab sx={fabStyle} onClick={() => addBtn()} color='primary'>
-                <AddIcon/>
-            </Fab>
+
+            <Box display={"flex"} justifyContent={"center"}>
+                <Box  maxWidth={{ sm: '800px', xs: '350px' }} marginTop={"10px"} >
+                    {noPacients()}
+                </Box>
+                <Fab sx={fabStyle} onClick={() => addBtn()} color='primary'>
+                    <AddIcon/>
+                </Fab>
+            </Box>
         </Box>
+
     )
 }
