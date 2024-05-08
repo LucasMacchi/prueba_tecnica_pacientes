@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
 import AppBar from '@mui/material/AppBar'
-import Typeography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography'
 import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton'
-import { useNavigate   } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 //Components
 import Alerta from '../Others/Alert';
 
@@ -14,8 +14,6 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 import GroupsIcon from '@mui/icons-material/Groups';
-
-import { TNavigate } from '../../Interfaces/interfaces';
 
 //css
 import "./NavBar.css"
@@ -56,7 +54,7 @@ export default function NavBar () {
             return (
                 <Box sx={{display: "flex"}}>
                     <AccountBoxIcon fontSize='large' sx={{marginTop:"2px", display: {sm:"block", xs: "none"}}}/>
-                    <Typeography sx={{ typography: { sm: 'h4', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typeography>
+                    <Typography sx={{ typography: { sm: 'h4', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typography>
                     <IconButton onClick={() => logoutBtn()} aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
                 </Box>
             )
@@ -64,7 +62,7 @@ export default function NavBar () {
         else{
             return(
                 <Box sx={{display: "flex"}}>
-                    <Button variant="text" onClick={() => loginBtn()} startIcon={<LoginIcon fontSize='large' color='secondary' />}>{<Typeography color='secondary' variant='h6' >INGRESAR</Typeography>}</Button>
+                    <Button variant="text" onClick={() => loginBtn()} startIcon={<LoginIcon fontSize='large' color='secondary' />}>{<Typography color='secondary' variant='h6' >INGRESAR</Typography>}</Button>
                 </Box>
             )
 
@@ -77,10 +75,10 @@ export default function NavBar () {
             return(
                 <Box marginLeft={{sm:"50px", xs: "3px"}}>
                     <Button onClick={() => navigation("/home")} sx={{marginRight: {sm:"35px", xs: "5px"}}} color='secondary' variant='text' size='large'>
-                        <Typeography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Inicio</Typeography>
+                        <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Inicio</Typography>
                     </Button>
                     <Button onClick={() => navigation("/pacients")} color='secondary' variant='text' size='large' endIcon={<GroupsIcon fontSize='large'/>}>
-                        <Typeography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Pacientes</Typeography>
+                        <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Pacientes</Typography>
                     </Button>
                 </Box>
             )
@@ -94,7 +92,7 @@ export default function NavBar () {
                 <Toolbar sx={{display: "flex", justifyContent: "space-between"}}>
                     <Box sx={{display: "flex", textAlign: "center"}}>
                         <LocalHospitalIcon fontSize='large' sx={{marginRight: "5px", marginTop: "2px", display: {sm:"block",xs: "none"}}}/>
-                        <Typeography sx={{ typography: { sm: 'h4', xs: 'h6' } }} gutterBottom>ICC</Typeography>
+                        <Typography sx={{ typography: { sm: 'h4', xs: 'h6' } }} gutterBottom>ICC</Typography>
                         {showNavigation()}
                     </Box>
                     {profile()}

@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material";
 import { red } from "@mui/material/colors";
  
 const primary = red[500]
+const paper = red[100]
 const theme = createTheme({
     palette: {
         primary: {
@@ -18,9 +19,6 @@ const theme = createTheme({
             
         }
     },
-    typography: {
-        
-    }
 })
 
 export default theme;

@@ -27,16 +27,16 @@ export default function App() {
   return (
     <div className='app'>
       <NavBar/>
-      {global?.menu ? <Menu/> : ""}
       <Routes>
         <Route path="*" element={global?.isLogged ? <Home/> : <HomeNotLog/>}/>
         <Route path="/home" element={global?.isLogged ? <Home/> : <HomeNotLog/>}/>
         <Route path='/pacients' element={global?.isLogged ? <Pacients/> : <HomeNotLog/>}/>
       </Routes>
-
+      
       <div className='bottom'>
         {global?.isLogged ? <Bottom/> : ""}
       </div>
+      {global?.menu ? <Menu/> : ""}
     </div>
   );
 }
