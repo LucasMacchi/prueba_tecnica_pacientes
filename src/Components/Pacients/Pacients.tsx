@@ -14,9 +14,12 @@ export default function Pacients () {
         pacientCon?.setDniEdit(40166091)
         global?.changeMenu("editPacient")
     }
+    const deletePacient = () => {
+        pacientCon?.getDeletePacient(42266143, pacientCon.pacientes)
+    }
     return(
         <div>
-            <button onClick={() => edit()}>aca</button>
+            <button onClick={() => deletePacient()}>aca</button>
             <h1>Pacientes</h1>
         </div>
     )

@@ -16,6 +16,8 @@ const pacientsReducer = (state: IPacientesState, action: IAction): IPacientesSta
             return {...state, pacient_edit_dni: payload}
         case actions.PACIENT_EDIT:
             return{...state, pacient_edit_dni: 0, pacientes: payload}
+        case actions.PACIENT_DELETE:
+            return {...state, pacientes: payload}
         default:
             return state
     }
@@ -35,8 +37,17 @@ export default function PacientesState(props: IPropsChildren ) {
         })
     }
     //Elimina pacientes
-    const getDeletePacient = (dni: number): boolean => {
-        return false
+    const getDeletePacient = (dni: number, pacientTotal: IPaciente[]): boolean => {
+        try {
+            const newArray = pacientTotal.filter(p => p.dni !== dni)
+            dispatch({
+                type: actions.PACIENT_DELETE,
+                payload: newArray
+            })
+            return true
+        } catch (error) {
+            return false
+        }
     }
     //Añade pacientes
     const getAddPacient = (pacient: IPaciente, pacientTotal: IPaciente[]): boolean => {
@@ -76,7 +87,7 @@ export default function PacientesState(props: IPropsChildren ) {
         if(pacient) return pacient
         
     }
-    
+
     //Esta funcion setea un dni para poder modificar ese paciente
     const setDniEdit = (dni: number) => {
         dispatch({

@@ -40,7 +40,7 @@ export interface IPacientesState{
     pacientes: IPaciente[],
     pacient_edit_dni: number,
     getAllPacients: () => void,
-    getDeletePacient: (dni: number) => boolean,
+    getDeletePacient: (dni: number, pacientTotal: IPaciente[]) => boolean,
     getAddPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
     getEditPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
     getPacient: (dni: number, pacientTotal: IPaciente[]) => IPaciente | void,
