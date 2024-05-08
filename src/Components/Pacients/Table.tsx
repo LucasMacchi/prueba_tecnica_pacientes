@@ -6,13 +6,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
 //Iconos
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import InfoIcon from '@mui/icons-material/Info';
 import Pagination from '@mui/material/Pagination';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 //Color
 import { red, orange } from "@mui/material/colors";
@@ -58,19 +61,32 @@ export default function DataTable () {
     const changePage = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
     };
+
     //Esto se encarga de movernos una pagina anterior si la pagina actual se elimina
     useEffect(() => {
         if(!pacientCon?.paginated_pacients[page-1]) setPage(page-1);
     },[pacientCon?.paginated_pacients]);
 
+    const orderIcon = () => {
+        if(pacientCon?.pacient_order ==="asc") return "asc"
+        else return "desc"
+    }
+
+    const changeOrd = () => {
+        if(pacientCon?.pacient_order ==="asc") pacientCon.changeOrder("des", pacientCon.pacientes)
+        else pacientCon?.changeOrder("asc", pacientCon.pacientes)
+    }
 
     return(
         <Box>
             <TableContainer component={Paper} sx={{height: { sm: '500px', xs: '280px' }}} style={{backgroundColor: tableColor}}>
-                <Table size='medium' sx={{ maxWidth: "500px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
+                <Table size='medium' sx={{ maxWidth: "1000px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
                     <TableHead>
                         <TableRow>
-                            <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Nombre</Typography></TableCell>
+                            <TableCell sortDirection={orderIcon()} sx={{display: "flex"}}>
+                                <TableSortLabel color='secondary' direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
+                                <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Nombre</Typography>
+                                </TableCell>
                             <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Fecha de Nacimiento</Typography></TableCell>
                             <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>DNI</Typography></TableCell>
                             <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Acciones</Typography></TableCell>

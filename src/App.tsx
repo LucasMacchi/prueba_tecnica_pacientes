@@ -27,6 +27,7 @@ export default function App() {
     pacientes?.getAllPacients();
   },[]);
   //Cada vez que cambia el array de pacientes, se hace un nuevo paginado
+  
   useEffect(() => {
     pacientes?.setPagination(pacientes.pacientes);
   },[pacientes?.pacientes]);

@@ -24,7 +24,7 @@ const pacientsReducer = (state: IPacientesState, action: IAction): IPacientesSta
         case actions.DETAILS_PACIENT:
             return {...state, pacient_Detail: payload}
         case actions.ORDER_PACIENTS:
-            return {...state, pacient_order: payload.order, pacientes: payload.sorted}
+            return {...state, pacient_order: payload}
         case actions.PAGINATED_PACIENTS:
             return {...state, paginated_pacients: payload}
         default:
@@ -69,7 +69,6 @@ export default function PacientesState(props: IPropsChildren ) {
                 type: actions.PACIENT_ADD,
                 payload: newArray
             });
-            setPagination(newArray);
             return true
         } catch (error) {
             return false
@@ -95,7 +94,6 @@ export default function PacientesState(props: IPropsChildren ) {
     };
     //Traer un paciente usando un dni
     const getPacient = (dni: number, pacientTotal: IPaciente[]): IPaciente | void => {
-        console.log(pacientTotal);
         const pacient = pacientTotal.filter(p => p.dni === dni)[0];
         if(pacient) return pacient;
         
@@ -126,8 +124,8 @@ export default function PacientesState(props: IPropsChildren ) {
     };
 
     //Esta funcion dividira el array de pacientes en otros para el paginado
-    const setPagination = (pacientTotal: IPaciente[]) => {
-        const pacientTotalSorted = pacientSort(pacientTotal, state.pacient_order);
+    const setPagination = (pacientTotal: IPaciente[], order?: Torder) => {
+        const pacientTotalSorted = pacientSort(pacientTotal, order ? order : state.pacient_order);
         const number_pacients_array = 4;
         let selected_array = 0;
         let paginated: Array<IPaciente[]> = [[]];
@@ -150,9 +148,9 @@ export default function PacientesState(props: IPropsChildren ) {
         const sorted = pacientSort(pacientTotal, order)
         dispatch({
             type: actions.ORDER_PACIENTS,
-            payload: {order, sorted}
+            payload: order
         });
-        setPagination(state.pacientes);
+        setPagination(sorted, order)
     };
     //Filtro 
     const filter = (pacientTotal: IPaciente[], isNumber: boolean, search: string) => {
@@ -165,7 +163,6 @@ export default function PacientesState(props: IPropsChildren ) {
         }
         else{
             const filteredArray = pacientTotal.filter(p => p.apellido.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || p.nombre.toLocaleLowerCase().includes(search.toLocaleLowerCase()))
-            setPagination(filteredArray)
             if(filteredArray){
                 setPagination(filteredArray)
             };
