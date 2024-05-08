@@ -15,4 +15,4 @@ export default {
     GLOBAL_LOGIN: "global_login",
     GLOBAL_LOGOUT: "global_logout",
     GLOBAL_ALERT: "global_alert"
-}
+};

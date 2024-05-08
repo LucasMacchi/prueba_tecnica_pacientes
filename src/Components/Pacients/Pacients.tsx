@@ -5,24 +5,20 @@ import DataTable from './Table';
 import Typography from '@mui/material/Typography'
 import TextField from '@mui/material/TextField';
 import { red } from "@mui/material/colors";
-import { TtypeAlert, nameRegex, numbersNoLimitRegex } from '../../Interfaces/interfaces';
-import Button from '@mui/material/Button';
-
-//icons
-import SearchIcon from '@mui/icons-material/Search';
+import { nameRegex, numbersNoLimitRegex } from '../../Interfaces/interfaces';
 
 import { useContext, useState, useEffect } from 'react';
 import { GlobalContext, PacienteContext } from '../../Context/Contexts';
 
 export default function Pacients () {
 
-    const global = useContext(GlobalContext)
+    const global = useContext(GlobalContext);
 
-    const pacientCon = useContext(PacienteContext)
+    const pacientCon = useContext(PacienteContext);
 
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState("");
 
-    const tableColor = red[500]
+    const tableColor = red[500];
 
     const fabStyle = {
         position: 'absolute',
@@ -32,29 +28,25 @@ export default function Pacients () {
 
 
     const addBtn = () => {
-        global?.changeMenu("addPacient")
-    }
+        global?.changeMenu("addPacient");
+    };
 
     useEffect(() => {
-        if(!search) pacientCon?.setPagination(pacientCon.pacientes)
+        if(!search) pacientCon?.setPagination(pacientCon.pacientes);
         if(numbersNoLimitRegex.test(search)){
-            pacientCon?.filter(pacientCon.pacientes, true, search)
+            pacientCon?.filter(pacientCon.pacientes, true, search);
         }
         else if(nameRegex.test(search)) {
-            pacientCon?.filter(pacientCon.pacientes, false, search)
+            pacientCon?.filter(pacientCon.pacientes, false, search);
 
         }
 
-    },[search])
-
-    const alertFn = (type: TtypeAlert, msg: string) => {
-        global?.setAlert(true, msg, type)
-    }
-    
+    },[search]);
+    //Cuando no se encuentran pacientes, se muestra un texto que lo comunica
     const noPacients = () => {
-        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No se encuentran pacientes.</Typography>)
-        else return (<DataTable/>)
-    }
+        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No se encuentran pacientes.</Typography>);
+        else return (<DataTable/>);
+    };
 
     return(
         <Box>
@@ -76,5 +68,5 @@ export default function Pacients () {
             </Box>
         </Box>
 
-    )
-}
+    );
+};

@@ -5,8 +5,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography'
 
@@ -27,41 +25,43 @@ import { Paper } from '@mui/material';
 
 export default function DataTable () {
 
-    const global = useContext(GlobalContext)
-    const pacientCon = useContext(PacienteContext)
+    const global = useContext(GlobalContext);
+    const pacientCon = useContext(PacienteContext);
 
-    const [page, setPage] = useState(1)
+    //Este estado maneja el paginado
+    const [page, setPage] = useState(1);
 
-    const tableColor = red[500]
-    const allergyColor = orange[900]
+    const tableColor = red[500];
+    const allergyColor = orange[900];
 
+    //Si un paciente tiene una alergia, le cambia el color
     const checkAllergy = (pacient: IPaciente): boolean => {
         if(pacient.alergias) return true
         else return false
-    }
-
+    };
+    //Este boton se encarga de abrir el menu para editar
     const editBtn = (dni: number) => {
-        pacientCon?.setDniEdit(dni)
-        global?.changeMenu("editPacient")
-    }
-
+        pacientCon?.setDniEdit(dni);
+        global?.changeMenu("editPacient");
+    };
+    //Este boton se encarga de eliminar el paciente
     const deleteBtn = (dni: number) => {
-        pacientCon?.setDniEdit(dni)
-        global?.changeMenu("deletePacient")
-    }
-
+        pacientCon?.setDniEdit(dni);
+        global?.changeMenu("deletePacient");
+    };
+    //Este boton se encarga de abrir el menu ver los detalles
     const detailsBtn = (paciente: IPaciente) => {
-        pacientCon?.getPacientDetails(paciente)
-        global?.changeMenu("detailsPacient")
-    }
+        pacientCon?.getPacientDetails(paciente);
+        global?.changeMenu("detailsPacient");
+    };
 
     const changePage = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value)
-    }
-
+        setPage(value);
+    };
+    //Esto se encarga de movernos una pagina anterior si la pagina actual se elimina
     useEffect(() => {
-        if(!pacientCon?.paginated_pacients[page-1]) setPage(page-1)
-    },[pacientCon?.paginated_pacients])
+        if(!pacientCon?.paginated_pacients[page-1]) setPage(page-1);
+    },[pacientCon?.paginated_pacients]);
 
 
     return(
@@ -104,5 +104,5 @@ export default function DataTable () {
         </Box>
 
 
-    )
-}
+    );
+};

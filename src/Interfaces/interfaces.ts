@@ -1,7 +1,7 @@
-export type TMenuOptions = "login" | "logout" | "addPacient" | "editPacient" | "deletePacient" | "detailsPacient" | false 
-export type TtypeAlert = "success" | "info" | "error" | "warning"
-export type TNavigate = "home" | "pacients"
-export type Torder = "asc" | "des"
+export type TMenuOptions = "login" | "logout" | "addPacient" | "editPacient" | "deletePacient" | "detailsPacient" | false ;
+export type TtypeAlert = "success" | "info" | "error" | "warning";
+export type TNavigate = "home" | "pacients";
+export type Torder = "asc" | "des";
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const nameRegex: RegExp= /^[A-Za-z ñ]+$/;
@@ -17,7 +17,7 @@ export interface IPaciente {
     localidad: string,
     nacimiento: string,
     alergias: string
-}
+};
 export interface IPacienteCreate {
     nombre: string,
     apellido: string,
@@ -25,18 +25,18 @@ export interface IPacienteCreate {
     localidad: string,
     nacimiento: string,
     alergias: string
-}
+};
 
 export interface IUser {
     username: string,
     email: string,
     password?: string
-}
+};
 
 export interface IUserLogin {
     email: string,
     password: string
-}
+};
 
 export interface IPacientesState{
     pacientes: IPaciente[],
@@ -54,7 +54,7 @@ export interface IPacientesState{
     setPagination: (pacientTotal: IPaciente[]) =>void,
     changeOrder: (order: Torder, pacientTotal: IPaciente[]) => void,
     filter: (pacientTotal: IPaciente[], isNumber: boolean, search: string) => void
-}
+};
 
 export interface IGlobalState {
     menu: TMenuOptions
@@ -66,23 +66,23 @@ export interface IGlobalState {
     login: (user: IUserLogin, remember: boolean) => boolean,
     autoLogin: () => void
     logout: () => void
-}
+};
 
 export interface IAction{
     type: string,
     payload: any
-}
+};
 
 export interface IPropsChildren {
     children: React.ReactNode | JSX.Element | JSX.Element[]
-}
+};
 
 export interface IMenuSelection {
     type: "login"
-}
+};
 
 export interface IAlert {
     alert_status : boolean,
     alert_msg : string,
     alert_type: TtypeAlert
-}
+};

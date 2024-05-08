@@ -1,6 +1,5 @@
-import Typography from '@mui/material/Typography'
-import Box from '@mui/material/Box'
-
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 
 //Transitions
 import Zoom from '@mui/material/Zoom';
@@ -17,5 +16,5 @@ export default function HomeNotLog () {
             <Zoom in={true} style={{transitionDelay: '500ms'}}>{<Typography sx={{ typography: { sm: 'h6', xs: 'body1' } }}>Porfavor, ingrese para ver los pacientes.</Typography>}</Zoom>
             <Slide direction="up" in={true} mountOnEnter unmountOnExit >{<img src='/icc_logo_extended.png' alt='icc' className='logo_navbar'/>}</Slide>
         </Box>
-    )
-}
+    );
+};

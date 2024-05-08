@@ -18,20 +18,24 @@ import Zoom from '@mui/material/Zoom';
 import { useContext } from 'react';
 import { GlobalContext } from '../../Context/Contexts';
 
-import "./Home.css"
+import "./Home.css";
+
+//Pagina de inicio, se puede o navegar a pacientes o salir de sesion con una "cartas" interactivas
 
 export default function Home () {
 
-    const navigation = useNavigate()
+    const navigation = useNavigate();
 
-    const global = useContext(GlobalContext)
+    const global = useContext(GlobalContext);
 
+    //Funcion para salir de sesion
     const logout = () => {
-        global?.changeMenu("logout")
-    }
+        global?.changeMenu("logout");
+    };
+    //Funcion para ir a pacientes
     const pacientNav = () => {
-        navigation("/pacients")
-    }
+        navigation("/pacients");
+    };
 
     return(
         <Box  >
@@ -79,5 +83,5 @@ export default function Home () {
                 </Box>
             </Box> 
         </Box>
-    )
-}
+    );
+};

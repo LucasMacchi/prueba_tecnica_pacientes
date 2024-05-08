@@ -7,24 +7,25 @@ import Button from '@mui/material/Button';
 //icons
 import EditNoteIcon from '@mui/icons-material/EditNote';
 
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { PacienteContext, GlobalContext } from '../../Context/Contexts';
 
 
 export default function DetailsMenu() {
     
-    const global = useContext(GlobalContext)
-    const pacientCon = useContext(PacienteContext)
-    const paciente = pacientCon?.pacient_Detail
+    const global = useContext(GlobalContext);
+    const pacientCon = useContext(PacienteContext);
+    const paciente = pacientCon?.pacient_Detail;
 
+    //Calcula la edad del paciente
     const age = () => {
-        return ageConverter(paciente?.nacimiento ? paciente.nacimiento : "1/1/2000")
-    }
-
+        return ageConverter(paciente?.nacimiento ? paciente.nacimiento : "1/1/2000");
+    };
+    //Si se apreta en editar, se cambiara de menu y se le dara el dni para editar
     const editBtn = (dni: number) => {
-        pacientCon?.setDniEdit(dni)
-        global?.changeMenu("editPacient")
-    }
+        pacientCon?.setDniEdit(dni);
+        global?.changeMenu("editPacient");
+    };
     
     
     return(
@@ -67,5 +68,5 @@ export default function DetailsMenu() {
                 <Button onClick={() => paciente ? editBtn(paciente.dni) : ""} variant="contained" endIcon={<EditNoteIcon/>}>Editar</Button>
             </Box>
         </Box>
-    )
-}
+    );
+};

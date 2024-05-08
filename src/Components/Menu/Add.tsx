@@ -12,12 +12,10 @@ import { GlobalContext, PacienteContext } from '../../Context/Contexts';
 
 export default function AddMenu () {
 
-    const global = useContext(GlobalContext)
-    const pacientCon = useContext(PacienteContext)
+    const global = useContext(GlobalContext);
+    const pacientCon = useContext(PacienteContext);
 
-
-    
-    const [loading, setLoading] = useState(false)
+    //Estado que controla los datos del paciente a crear
     const [pacient, setPacient] = useState<IPacienteCreate>({
         nombre: "",
         apellido: "",
@@ -25,13 +23,13 @@ export default function AddMenu () {
         localidad: "",
         nacimiento: "",
         alergias: ""
-    })
-
+    });
+    //Estado que controla los datos para crear la fecha de nacimiento
     const [date, setDate] = useState({
         day: "1",
         month: "1",
         year: "2000"
-    })
+    });
 
     //Esta funcion se llamara solo si se necesita editar un paciente, tendra la logica para cargar los datos
     const pacientToEdit = (pacient: IPaciente) => {
@@ -43,24 +41,24 @@ export default function AddMenu () {
             localidad: pacient.localidad,
             nacimiento: pacient.nacimiento,
             alergias: pacient.alergias
-        })
-        const dates = pacient.nacimiento.split("/")
+        });
+        const dates = pacient.nacimiento.split("/");
         setDate({
             day: dates[0],
             month: dates[1],
             year: dates[2]
-        })
-    }
+        });
+    };
     //Si se quiere editar un paciente, se va a cargar los datos del mismo
     useEffect(() => {
         if(global?.menu === "editPacient"){
             const pacientEdit = pacientCon?.getPacient(pacientCon.pacient_edit_dni, pacientCon.pacientes)
             if(pacientEdit) pacientToEdit(pacientEdit)
-        }
-    },[global?.menu])
+        };
+    },[global?.menu]);
 
 
-
+    //Este estado controla dinamicamente los errores y los mensajes que deben mostrar
     const [formsError, setError] = useState({
         name: false,
         nameMsg: "",
@@ -78,67 +76,58 @@ export default function AddMenu () {
         monthMsg: "",
         year: false,
         yearMsg: ""
-    })
+    });
 
-    //Errors handlers
+    //Errors handlers, funciones que establecen los criterios para que un dato tenga errores
     const errorHandlerName = () => {
-        if(pacient.nombre === "") setError({...formsError, name: true, nameMsg: "Ingrese un nombre"})
-        else if(!nameRegex.test(pacient.nombre)) setError({...formsError, name: true, nameMsg: "Solo letras son permitidas"})
-        else setError({...formsError, name: false, nameMsg: ""})
-    }
+        if(pacient.nombre === "") setError({...formsError, name: true, nameMsg: "Ingrese un nombre"});
+        else if(!nameRegex.test(pacient.nombre)) setError({...formsError, name: true, nameMsg: "Solo letras son permitidas"});
+        else setError({...formsError, name: false, nameMsg: ""});
+    };
     const errorHandlerSurname = () => {
-        if(pacient.nombre === "") setError({...formsError, surname: true, surnameMsg: "Ingrese un Apellido"})
-        else if(!nameRegex.test(pacient.apellido)) setError({...formsError, surname: true, surnameMsg: "Solo letras son permitidas"})
-        else setError({...formsError, surname: false, surnameMsg: ""})
-    }
+        if(pacient.nombre === "") setError({...formsError, surname: true, surnameMsg: "Ingrese un Apellido"});
+        else if(!nameRegex.test(pacient.apellido)) setError({...formsError, surname: true, surnameMsg: "Solo letras son permitidas"});
+        else setError({...formsError, surname: false, surnameMsg: ""});
+    };
     const errorHandlerDni = () => {
-        if(pacient.dni === "") setError({...formsError, dni: true, dniMsg: "Ingrese un DNI"})
-        else if(!numbersRegex.test(pacient.dni)) setError({...formsError, dni: true, dniMsg: "Solo numeros son permitidos, 8 digitos"})
-        else setError({...formsError, dni: false, dniMsg: ""})
-    }
+        if(pacient.dni === "") setError({...formsError, dni: true, dniMsg: "Ingrese un DNI"});
+        else if(!numbersRegex.test(pacient.dni)) setError({...formsError, dni: true, dniMsg: "Solo numeros son permitidos, 8 digitos"});
+        else setError({...formsError, dni: false, dniMsg: ""});
+    };
     const errorHandlerLocalidad = () => {
-        if(pacient.localidad === "") setError({...formsError, localidad: true, localidadMsg: "Ingrese una Localidad"})
-        else setError({...formsError, localidad: false, localidadMsg: ""})
-    }
+        if(pacient.localidad === "") setError({...formsError, localidad: true, localidadMsg: "Ingrese una Localidad"});
+        else setError({...formsError, localidad: false, localidadMsg: ""});
+    };
     const errorHandlerAlergias = () => {
-        if(pacient.alergias === "") setError({...formsError, alergias: true, alergiasMsg: "Puede ingresar una alergia"})
-        else setError({...formsError, alergias: false, alergiasMsg: ""})
-    }
+        if(pacient.alergias === "") setError({...formsError, alergias: true, alergiasMsg: "Puede ingresar una alergia"});
+        else setError({...formsError, alergias: false, alergiasMsg: ""});
+    };
     const errorHandlerDays = () => {
-        if(date.day === "") setError({...formsError, day: true, dayMsg: "Ingrese un dia"})
-        else if(!daysMonthsRegex.test(date.day)) setError({...formsError, day: true, dayMsg: "Ingrese un dia valido"})
-        else if(parseInt(date.day) > 31 || parseInt(date.day) < 1) setError({...formsError, day: true, dayMsg: "Ingrese un dia valido"})
+        if(date.day === "") setError({...formsError, day: true, dayMsg: "Ingrese un dia"});
+        else if(!daysMonthsRegex.test(date.day)) setError({...formsError, day: true, dayMsg: "Ingrese un dia valido"});
+        else if(parseInt(date.day) > 31 || parseInt(date.day) < 1) setError({...formsError, day: true, dayMsg: "Ingrese un dia valido"});
         else setError({...formsError, day: false, dayMsg: ""})
-    }
+    };
     const errorHandlerMonths = () => {
-        if(date.month === "") setError({...formsError, month: true, monthMsg: "Ingrese un mes"})
-        else if(!daysMonthsRegex.test(date.month)) setError({...formsError, month: true, monthMsg: "Ingrese un mes valido"})
-        else if(parseInt(date.month) > 12 || parseInt(date.month) < 1) setError({...formsError, month: true, monthMsg: "Ingrese un mes valido"})
-        else setError({...formsError, month: false, monthMsg: ""})
-    }
+        if(date.month === "") setError({...formsError, month: true, monthMsg: "Ingrese un mes"});
+        else if(!daysMonthsRegex.test(date.month)) setError({...formsError, month: true, monthMsg: "Ingrese un mes valido"});
+        else if(parseInt(date.month) > 12 || parseInt(date.month) < 1) setError({...formsError, month: true, monthMsg: "Ingrese un mes valido"});
+        else setError({...formsError, month: false, monthMsg: ""});
+    };
     const errorHandlerYears = () => {
-        if(date.year === "") setError({...formsError, year: true, yearMsg: "Ingrese un año"})
-        else if(!yearsRegex.test(date.year)) setError({...formsError, year: true, yearMsg: "Ingrese un año valido"})
-        else setError({...formsError, year: false, yearMsg: ""})
-    }
-    useEffect(() => {
-        errorHandlerName();
-        errorHandlerSurname();
-        errorHandlerDni();
-        errorHandlerLocalidad();
-        errorHandlerAlergias();
-        errorHandlerDays();
-        errorHandlerMonths();
-        errorHandlerYears();
-    },[]);
-    useEffect(errorHandlerName,[pacient.nombre])
-    useEffect(errorHandlerSurname,[pacient.apellido])
-    useEffect(errorHandlerDni,[pacient.dni])
-    useEffect(errorHandlerLocalidad,[pacient.localidad])
-    useEffect(errorHandlerAlergias,[pacient.alergias])
-    useEffect(errorHandlerDays,[date.day])
-    useEffect(errorHandlerMonths,[date.month])
-    useEffect(errorHandlerYears,[date.year])
+        if(date.year === "") setError({...formsError, year: true, yearMsg: "Ingrese un año"});
+        else if(!yearsRegex.test(date.year)) setError({...formsError, year: true, yearMsg: "Ingrese un año valido"});
+        else setError({...formsError, year: false, yearMsg: ""});
+    };
+    //Controlan en los datos cada vez que se actualizan
+    useEffect(errorHandlerName,[pacient.nombre]);
+    useEffect(errorHandlerSurname,[pacient.apellido]);
+    useEffect(errorHandlerDni,[pacient.dni]);
+    useEffect(errorHandlerLocalidad,[pacient.localidad]);
+    useEffect(errorHandlerAlergias,[pacient.alergias]);
+    useEffect(errorHandlerDays,[date.day]);
+    useEffect(errorHandlerMonths,[date.month]);
+    useEffect(errorHandlerYears,[date.year]);
 
 
     //Va añadiendo los datos al estado de paciente
@@ -146,19 +135,19 @@ export default function AddMenu () {
         setPacient({
             ...pacient,
             [prop]: payload
-        })
-    }
+        });
+    };
     //Va añadiendo los datos al estado de date
     const handleDate = (prop: string, payload: string) => {
         setDate({
             ...date,
             [prop]: payload
-        })
-    }
+        });
+    };
     //Esta funcion generara una alerta dependiendo de la situacion
     const alertFn = (type: TtypeAlert, msg: string) => {
         global?.setAlert(true, msg, type)
-    }
+    };
 
     const createPacient = () => {
         const newPacient: IPaciente = {
@@ -168,17 +157,17 @@ export default function AddMenu () {
             localidad: pacient.localidad,
             nacimiento: date.day+"/"+date.month+"/"+date.year,
             alergias: pacient.alergias
-        }
+        };
         if(global?.menu === "addPacient"){
-            const result = pacientCon?.getAddPacient(newPacient, pacientCon.pacientes)
-            if(result) alertFn("success", "Paciente creado exitosamente")
-            else alertFn("error", "Error al crear paciente")
+            const result = pacientCon?.getAddPacient(newPacient, pacientCon.pacientes);
+            if(result) alertFn("success", "Paciente creado exitosamente");
+            else alertFn("error", "Error al crear paciente");
         }
         else {
             const result = pacientCon?.getEditPacient(newPacient, pacientCon.pacientes)
             if(result) alertFn("success", "Paciente editado exitosamente")
             else alertFn("error", "Error al editar paciente")
-        }
+        };
         
         setPacient({
             nombre: "",
@@ -187,28 +176,28 @@ export default function AddMenu () {
             localidad: "",
             nacimiento: "",
             alergias: ""
-        })
+        });
         setDate({
             day: "1",
             month: "1",
             year: "2000"
-        })
-        global?.changeMenu(false)
+        });
+        global?.changeMenu(false);
 
-    }
-
+    };
+    //Estas condiciones desactivan el boton de crear al menos que se cumplan las condiciones
     const disableBtn = (): boolean => {
         if(formsError.day || formsError.month || formsError.year || formsError.name 
             || formsError.surname || formsError.dni || formsError.localidad
             || !pacient.nombre || !pacient.apellido || !pacient.dni || !pacient.localidad
             || !date.day || !date.month || !date.year) return true
         else return false
-    }
-
+    };
+    //Salir del menu, se deja en 0 el dni a editar por si se habia modificado
     const exitMenu = () => {
-        global?.changeMenu(false)
-        pacientCon?.setDniEdit(0)
-    }
+        global?.changeMenu(false);
+        pacientCon?.setDniEdit(0);
+    };
     //INTENTAR AGREGAR DIVIDER DESPUES
     return (
         <Box component={"form"}>
@@ -250,5 +239,5 @@ export default function AddMenu () {
                 </Box>
             </Box>
         </Box>
-    )
-}
+    );
+};

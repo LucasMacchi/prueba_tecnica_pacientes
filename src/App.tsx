@@ -17,17 +17,19 @@ import { GlobalContext, PacienteContext } from './Context/Contexts';
 
 export default function App() {
 
-  const global = useContext(GlobalContext)
-  const pacientes = useContext(PacienteContext)
+  const global = useContext(GlobalContext);
+  const pacientes = useContext(PacienteContext);
 
+  //Al entrar a la pagina, se chequea el localstore por si ya se estaba logeado
+  //Y se obtiene los pacientes del JSON
   useEffect(() => {
-    global?.autoLogin()
-    pacientes?.getAllPacients()
-  },[])
-
+    global?.autoLogin();
+    pacientes?.getAllPacients();
+  },[]);
+  //Cada vez que cambia el array de pacientes, se hace un nuevo paginado
   useEffect(() => {
-    pacientes?.setPagination(pacientes.pacientes)
-  },[pacientes?.pacientes])
+    pacientes?.setPagination(pacientes.pacientes);
+  },[pacientes?.pacientes]);
 
   return (
     <div className='app'>
@@ -45,6 +47,6 @@ export default function App() {
       <Alerta/>
     </div>
   );
-}
+};
 
 

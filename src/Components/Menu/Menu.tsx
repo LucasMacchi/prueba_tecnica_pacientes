@@ -23,27 +23,26 @@ import { GlobalContext, PacienteContext } from '../../Context/Contexts';
 
 export default function Menu () {
 
-    const global = useContext(GlobalContext)
-    const pacientCon = useContext(PacienteContext)
+    const global = useContext(GlobalContext);
+    const pacientCon = useContext(PacienteContext);
 
+    //Boton que cierra el menu, pone en 0 el dni para editar
     const closeBtn = () => {
-        global?.changeMenu(false)
-        pacientCon?.setDniEdit(0)
-    }
+        global?.changeMenu(false);
+        pacientCon?.setDniEdit(0);
+    };
     //Mostrara el tipo de menu correspondiente
     const typeOfMenu = () => {
         if(global?.menu === "login") return (<LoginMenu/>)
         else if (global?.menu === "logout" || global?.menu === "deletePacient") return (<CheckerMenu/>)
         else if (global?.menu === "addPacient" || global?.menu === "editPacient") return(<AddMenu/>)
         else if( global?.menu === "detailsPacient") return(<DetailsMenu/>)
-    }
+    };
     //Funcion que devuelve un boleano que cierra o abre el menu
     const menuOpener = () => {
         if(global?.menu) return true
         else return false
-    }
-
-
+    };
     return(
         <Backdrop open={menuOpener()}>
             <Paper>
@@ -59,6 +58,5 @@ export default function Menu () {
                 </Box>
             </Paper>
         </Backdrop>
-    )
-
-}
+    );
+};

@@ -17,24 +17,24 @@ import GroupsIcon from '@mui/icons-material/Groups';
 //css
 import "./NavBar.css"
 
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../Context/Contexts';
 
 export default function NavBar () {
 
-    const global = useContext(GlobalContext)
-
-    const navigation = useNavigate()
+    const global = useContext(GlobalContext);
+    //Funcion de react router para navegar a otros urls
+    const navigation = useNavigate();
 
     //Buton para logearse a la pagina
     const loginBtn = () => {
-        global?.changeMenu("login")
-    }
+        global?.changeMenu("login");
+    };
 
     //Buton para deslogearse de la pagina
     const logoutBtn = () => {
-        global?.changeMenu("logout")
-    }
+        global?.changeMenu("logout");
+    };
 
     //Esta funcion mostrara o el boton para ingresar o informacion del usuario, dependiendo de si esta logeado o no
     const profile = () => {
@@ -45,17 +45,17 @@ export default function NavBar () {
                     <Typography sx={{ typography: { sm: 'h4', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typography>
                     <IconButton onClick={() => logoutBtn()} aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
                 </Box>
-            )
+            );
         }
         else{
             return(
                 <Box sx={{display: "flex"}}>
                     <Button variant="text" onClick={() => loginBtn()} startIcon={<LoginIcon fontSize='large' color='secondary' />}>{<Typography color='secondary' variant='h6' >INGRESAR</Typography>}</Button>
                 </Box>
-            )
+            );
 
-        }
-    }
+        };
+    };
 
     //Una vez logeados, podran ir a la seccion de inicio o pacientes.
     const showNavigation = () => {
@@ -69,9 +69,9 @@ export default function NavBar () {
                         <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Pacientes</Typography>
                     </Button>
                 </Box>
-            )
-        }
-    }
+            );
+        };
+    };
 
 
     return(
@@ -88,5 +88,5 @@ export default function NavBar () {
             </AppBar>
             
         </Box>
-    )
-}
+    );
+};
