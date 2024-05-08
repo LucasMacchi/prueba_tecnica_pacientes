@@ -48,7 +48,7 @@ export default function Home () {
                             <Card sx={{maxWidth: "220px"}}>
                                 <CardContent>
                                     <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Pacientes <GroupsIcon/> </Typography>
-                                    <Divider/>
+                                    <Divider sx={{backgroundColor: "#fafafa"}}/>
                                     <Typography sx={{typography: { sm: 'body1', xs: 'caption' }}}>
                                         {"Aqui podras administrar tus pacientes como añadir nuevos,\neditar los existentes y eliminarlos. "}
                                     </Typography>
@@ -64,7 +64,7 @@ export default function Home () {
                             <Card sx={{maxWidth: "220px", marginLeft: { sm: '30px', xs: '5px' }}}>
                                 <CardContent>
                                     <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Cerrar Sesion <LogoutIcon/> </Typography>
-                                    <Divider/>
+                                    <Divider sx={{backgroundColor: "#fafafa"}}/>
                                     <Typography sx={{typography: { sm: 'body1', xs: 'caption' }}}>
                                         {"Cerrar la sesion en este dispositivo, tendra que ingresar sus datos devuelta. "}
                                     </Typography>

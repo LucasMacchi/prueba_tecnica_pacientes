@@ -24,6 +24,10 @@ export default function App() {
     pacientes?.getAllPacients()
   },[])
 
+  useEffect(() => {
+    pacientes?.setPagination(pacientes.pacientes)
+  },[pacientes?.pacientes])
+
   return (
     <div className='app'>
       <NavBar/>

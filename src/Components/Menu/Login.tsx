@@ -102,7 +102,7 @@ export default function LoginMenu () {
             <Box display={ 'flex'} justifyContent={"space-between"}>
                 <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='h6'>INGRESAR</Typography> 
             </Box>
-            <Divider/>
+            <Divider sx={{backgroundColor: "#fafafa"}}/>
             <Box marginTop={"10px"}>
             <Box>
                 <Box>

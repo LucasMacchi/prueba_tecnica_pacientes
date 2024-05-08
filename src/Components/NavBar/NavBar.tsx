@@ -27,8 +27,6 @@ export default function NavBar () {
 
     const navigation = useNavigate()
 
-    const [page, changePage] = useState(0)
-
     //Buton para logearse a la pagina
     const loginBtn = () => {
         global?.changeMenu("login")

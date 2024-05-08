@@ -1,9 +1,11 @@
 import { useReducer } from "react";
-import { IPacientesState, IPaciente, IAction, IPropsChildren } from "../../Interfaces/interfaces";
+import { IPacientesState, IPaciente, IAction, IPropsChildren, Torder } from "../../Interfaces/interfaces";
 import { PacienteContext } from "../Contexts";
 import { JsonConverterPacients } from "../../utils/jsonConverter";
+import pacientSort from "../../utils/pacientSort";
 import actions from "../actions";
 
+const emptyPacient: IPaciente = {nombre: "", apellido: "", nacimiento: "", localidad:"", alergias: "", dni: 0}
 //Este reducer cambiaria el estado de pacientes
 const pacientsReducer = (state: IPacientesState, action: IAction): IPacientesState => {
     const {payload, type} = action
@@ -17,7 +19,13 @@ const pacientsReducer = (state: IPacientesState, action: IAction): IPacientesSta
         case actions.PACIENT_EDIT:
             return{...state, pacient_edit_dni: 0, pacientes: payload}
         case actions.PACIENT_DELETE:
-            return {...state, pacientes: payload}
+            return {...state,pacient_edit_dni: 0, pacientes: payload}
+        case actions.DETAILS_PACIENT:
+            return {...state, pacient_Detail: payload}
+        case actions.ORDER_PACIENTS:
+            return {...state, pacient_order: payload.order, pacientes: payload.sorted}
+        case actions.PAGINATED_PACIENTS:
+            return {...state, paginated_pacients: payload}
         default:
             return state
     }
@@ -33,17 +41,19 @@ export default function PacientesState(props: IPropsChildren ) {
         const pacientesArray = JsonConverterPacients()
         dispatch({
             type: actions.GET_ALL_PACIENTS,
-            payload: pacientesArray
+            payload: pacientSort(pacientesArray, state.pacient_order)
         })
     }
     //Elimina pacientes
     const getDeletePacient = (dni: number, pacientTotal: IPaciente[]): boolean => {
         try {
             const newArray = pacientTotal.filter(p => p.dni !== dni)
+            
             dispatch({
                 type: actions.PACIENT_DELETE,
-                payload: newArray
+                payload: pacientSort(newArray, state.pacient_order)
             })
+            setPagination(newArray)
             return true
         } catch (error) {
             return false
@@ -53,10 +63,12 @@ export default function PacientesState(props: IPropsChildren ) {
     const getAddPacient = (pacient: IPaciente, pacientTotal: IPaciente[]): boolean => {
         try {
             pacientTotal.push(pacient)
+            const newArray = pacientSort(pacientTotal, state.pacient_order)
             dispatch({
                 type: actions.PACIENT_ADD,
-                payload: pacientTotal
+                payload: newArray
             })
+            setPagination(newArray)
             return true
         } catch (error) {
             return false
@@ -88,7 +100,7 @@ export default function PacientesState(props: IPropsChildren ) {
         
     }
 
-    //Esta funcion setea un dni para poder modificar ese paciente
+    //Esta funcion setea un dni para poder modificar o eliminar ese paciente
     const setDniEdit = (dni: number) => {
         dispatch({
             type: actions.DNI_EDIT_PACIENT,
@@ -96,16 +108,68 @@ export default function PacientesState(props: IPropsChildren ) {
         })
     }
 
+    //Esta funcion consigue todos los datos para mostrar en detalle
+    const getPacientDetails = (pacient: IPaciente | false) => {
+        if(pacient){
+            dispatch({
+                type: actions.DETAILS_PACIENT,
+                payload: pacient
+            })
+        }
+        else {
+            dispatch({
+                type: actions.DETAILS_PACIENT,
+                payload: emptyPacient
+            })
+        }
+    }
+
+    //Esta funcion dividira el array de pacientes en otros para el paginado
+    const setPagination = (pacientTotal: IPaciente[]) => {
+        const pacientTotalSorted = pacientSort(pacientTotal, state.pacient_order)
+        const number_pacients_array = 4
+        let selected_array = 0
+        let paginated: Array<IPaciente[]> = [[]]
+        for (let index = 0; index < pacientTotalSorted.length; index++) {
+            if(paginated[selected_array].length < number_pacients_array) paginated[selected_array].push(pacientTotal[index])
+            if(paginated[selected_array].length === number_pacients_array) {
+                paginated.push([])
+                selected_array++
+            }
+            
+        }
+        if(paginated.length > 1 && paginated[paginated.length-1].length < 1) paginated.pop()
+        dispatch({
+            type: actions.PAGINATED_PACIENTS,
+            payload: paginated
+        })
+    }
+
+    const changeOrder = (order: Torder, pacientTotal: IPaciente[]) => {
+        const sorted = pacientSort(pacientTotal, order)
+        dispatch({
+            type: actions.ORDER_PACIENTS,
+            payload: {order, sorted}
+        })
+        setPagination(state.pacientes)
+    }
+
     //Estado Inicial del Estado
     const initialState: IPacientesState = {
         pacientes: [],
         pacient_edit_dni: 0,
+        pacient_Detail: emptyPacient,
+        paginated_pacients: [],
+        pacient_order: "des",
         getAllPacients,
         getDeletePacient,
         getAddPacient,
         getEditPacient,
         getPacient,
-        setDniEdit
+        setDniEdit,
+        getPacientDetails,
+        setPagination,
+        changeOrder
     }
 
     const [state, dispatch] = useReducer(pacientsReducer, initialState)

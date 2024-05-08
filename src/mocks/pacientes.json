@@ -71,6 +71,38 @@
             "localidad":"Capital",
             "nacimiento":"10/8/2001",
             "alergias": ""
+        },
+        {
+            "nombre":"Mariano",
+            "apellido":"Castillo",
+            "dni":43722125,
+            "localidad":"Capital",
+            "nacimiento":"10/11/2001",
+            "alergias": ""
+        },
+        {
+            "nombre":"Javier",
+            "apellido":"Andres",
+            "dni":43528125,
+            "localidad":"Capital",
+            "nacimiento":"1/9/2001",
+            "alergias": "Penencilina"
+        },
+        {
+            "nombre":"Sergio",
+            "apellido":"Mendez",
+            "dni":43552525,
+            "localidad":"Capital",
+            "nacimiento":"23/6/2001",
+            "alergias": "Polen"
+        },
+        {
+            "nombre":"Andres",
+            "apellido":"Miguel",
+            "dni":403522128,
+            "localidad":"Mercedes",
+            "nacimiento":"26/4/2001",
+            "alergias": ""
         }
 
     ]

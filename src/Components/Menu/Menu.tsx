@@ -7,8 +7,9 @@ import IconButton from '@mui/material/IconButton'
 
 //Components
 import LoginMenu from './Login';
-import LogoutMenu from './Logout';
+import CheckerMenu from './CheckerMenu';
 import AddMenu from './Add';
+import DetailsMenu from './Details';
 
 //icons
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
@@ -17,22 +18,24 @@ import CloseIcon from '@mui/icons-material/Close';
 
 //Context
 import { useContext } from 'react';
-import { GlobalContext } from '../../Context/Contexts';
+import { GlobalContext, PacienteContext } from '../../Context/Contexts';
 
 
 export default function Menu () {
 
     const global = useContext(GlobalContext)
-
+    const pacientCon = useContext(PacienteContext)
 
     const closeBtn = () => {
         global?.changeMenu(false)
+        pacientCon?.setDniEdit(0)
     }
     //Mostrara el tipo de menu correspondiente
     const typeOfMenu = () => {
         if(global?.menu === "login") return (<LoginMenu/>)
-        else if (global?.menu === "logout") return (<LogoutMenu/>)
+        else if (global?.menu === "logout" || global?.menu === "deletePacient") return (<CheckerMenu/>)
         else if (global?.menu === "addPacient" || global?.menu === "editPacient") return(<AddMenu/>)
+        else if( global?.menu === "detailsPacient") return(<DetailsMenu/>)
     }
     //Funcion que devuelve un boleano que cierra o abre el menu
     const menuOpener = () => {

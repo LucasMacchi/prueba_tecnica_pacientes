@@ -2,8 +2,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import CircularProgress from '@mui/material/CircularProgress';
-import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 
 import { IPaciente, IPacienteCreate, nameRegex, numbersRegex, daysMonthsRegex, yearsRegex, TtypeAlert } from '../../Interfaces/interfaces';
@@ -217,7 +215,7 @@ export default function AddMenu () {
             <Box display={ 'flex'} justifyContent={"space-between"}>
                 <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='h6'>{global?.menu === "editPacient" ? "Editar Paciente" : "Añadir Nuevo Paciente"}</Typography> 
             </Box>
-            <Divider/>
+            <Divider sx={{backgroundColor: "#fafafa"}}/>
             <Box>
                 <Box display={'flex'} marginTop={"10px"}>
                     <TextField required={true} error={formsError.name} helperText={formsError.nameMsg} fullWidth id="nombre" size="small" 

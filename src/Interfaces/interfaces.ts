@@ -1,6 +1,7 @@
-export type TMenuOptions = "login" | "logout" | "addPacient" | "editPacient" | false 
+export type TMenuOptions = "login" | "logout" | "addPacient" | "editPacient" | "deletePacient" | "detailsPacient" | false 
 export type TtypeAlert = "success" | "info" | "error" | "warning"
 export type TNavigate = "home" | "pacients"
+export type Torder = "asc" | "des"
 
 export const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const nameRegex: RegExp= /^[A-Za-z ñ]+$/;
@@ -38,13 +39,19 @@ export interface IUserLogin {
 
 export interface IPacientesState{
     pacientes: IPaciente[],
+    paginated_pacients: Array<IPaciente[]>,
     pacient_edit_dni: number,
+    pacient_Detail: IPaciente,
+    pacient_order: Torder
     getAllPacients: () => void,
     getDeletePacient: (dni: number, pacientTotal: IPaciente[]) => boolean,
     getAddPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
     getEditPacient: (pacient: IPaciente, pacientTotal: IPaciente[]) => boolean,
     getPacient: (dni: number, pacientTotal: IPaciente[]) => IPaciente | void,
-    setDniEdit: (dni: number) => void
+    getPacientDetails: (pacient: IPaciente) => void,
+    setDniEdit: (dni: number) => void,
+    setPagination: (pacientTotal: IPaciente[]) =>void,
+    changeOrder: (order: Torder, pacientTotal: IPaciente[]) => void,
 }
 
 export interface IGlobalState {
