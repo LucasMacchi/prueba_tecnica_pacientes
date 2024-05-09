@@ -83,22 +83,24 @@ export default function DataTable () {
                                 <Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
                                 <TableSortLabel sx={{color: "#EEEEEE !important"}} direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
                                 </TableCell>
-                            <TableCell align='left' ><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha de Nacimiento</Typography></TableCell>
+                            <TableCell align='left' ><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha Nacimiento</Typography></TableCell>
                             <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
+                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>¿Alergias?</Typography></TableCell>
                             <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody >
                         {pacientCon?.paginated_pacients[page-1]?.map((p) => (
                             <TableRow hover={true} style={{backgroundColor: checkAllergy(p) ? allergyColor : itemColor}} key={p.dni}>
-                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.apellido+", "+p.nombre}</Typography></TableCell>
-                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.nacimiento}</Typography></TableCell>
-                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.dni}</Typography></TableCell>
+                                <TableCell align='center'><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.apellido+", "+p.nombre}</Typography></TableCell>
+                                <TableCell align='center'><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.nacimiento}</Typography></TableCell>
+                                <TableCell align='center'><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.dni}</Typography></TableCell>
+                                <TableCell align='center'><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.alergias ? "SI" : "NO"}</Typography></TableCell>
                                 <TableCell>
                                     <Box display={'flex'}>
-                                        <IconButton color="warning" onClick={() => detailsBtn(p)}><InfoIcon/></IconButton>
-                                        <IconButton color={checkAllergy(p) ? "secondary" : "primary"} onClick={() => editBtn(p.dni)}><EditNoteIcon/></IconButton>
-                                        <IconButton color="error" onClick={() => deleteBtn(p.dni)}><DeleteIcon/></IconButton>
+                                        <IconButton sx={{padding: "3px"}} color="warning" onClick={() => detailsBtn(p)}><InfoIcon/></IconButton>
+                                        <IconButton sx={{padding: "3px"}} color={checkAllergy(p) ? "secondary" : "primary"} onClick={() => editBtn(p.dni)}><EditNoteIcon/></IconButton>
+                                        <IconButton sx={{padding: "3px"}} color="error" onClick={() => deleteBtn(p.dni)}><DeleteIcon/></IconButton>
                                     </Box>
                                 </TableCell>
                             </TableRow>
