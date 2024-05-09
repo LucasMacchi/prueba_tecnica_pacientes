@@ -29,6 +29,18 @@ Instala todas las dependencias para el proyecto.
 
 Ejecuta el proyecto.
 
+# Credenciales para ingresar
+
+Existen 3 usuarios que se localizan en el archivo pacientes.json
+-   Usuario 1: 
+    -   Email: ricardo@gmail.com
+    -   Contraseña: 123456
+-   Usuario 2: 
+    -   Email: macchi@gmail.com
+    -   Contraseña: 2001
+-   Usuario 3: 
+    -   Email: maria@gmail.com
+    -   Contraseña: maria123
 
 # Proyecto Hecho por Lucas Macchi
 
