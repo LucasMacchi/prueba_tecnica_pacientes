@@ -54,8 +54,8 @@ export default function CheckerMenu () {
         <Box textAlign={"center"} >
             <Typeography marginBottom={"50px"} variant='body1'>{titleChanger()}</Typeography>
             <Box display={"flex"} justifyContent={"space-evenly"} >
-                <Button onClick={() => noBtn()}>No</Button>
-                <Button onClick={() => accionBtn()}>Si</Button>
+                <Button variant='outlined' onClick={() => noBtn()}>No</Button>
+                <Button variant='outlined' onClick={() => accionBtn()}>Si</Button>
             </Box>
         </Box>
     );

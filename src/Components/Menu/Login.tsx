@@ -39,7 +39,8 @@ export default function LoginMenu () {
     //Controla los errores que se muestran
     const [formsError, setError] = useState({
         emailError: false,
-        emailMsg: ""
+        emailMsg: "",
+        contra: false
     });
 
     //ERRORS HANDLERS, controla cuando se crean los errores
@@ -48,7 +49,10 @@ export default function LoginMenu () {
         else if(!emailRegex.test(userLogin.email)) setError({...formsError, emailError: true, emailMsg: "Email incorrecto" || "error"})
         else setError({...formsError, emailError: false, emailMsg: ""})
     };
-
+    const errorHandlerPassword = () => {
+        if(userLogin.password === "") setError({...formsError, contra: true})
+        else setError({...formsError, contra: false})
+    } 
     //Controla dinamicamente los errores
     useEffect(errorHandlerEmail,[userLogin.email]);
 
@@ -62,20 +66,27 @@ export default function LoginMenu () {
 
     //boton para hacer login
     const login = () => {
-        const result = global?.login(userLogin, check);
-        setLoading(true);
-        navigation("/home");
-        setTimeout(() => {
-            setLoading(false);
-            if(result){
-                global?.setAlert(true, "HA INGRESADO EXITOSAMENTE", "success");
-                global?.changeMenu(false);
-            }
-            else {
-                global?.setAlert(true, "ERROR AL INGRESAR, CHEQUEE SUS DATOS", "error");
-                setUserLogin({email: "", password: ""});
-            }
-        }, 2000);
+        if(disableBtn()){
+            errorHandlerEmail()
+            errorHandlerPassword()
+        }
+        else {
+            const result = global?.login(userLogin, check);
+            setLoading(true);
+            navigation("/home");
+            setTimeout(() => {
+                setLoading(false);
+                if(result){
+                    global?.setAlert(true, "HA INGRESADO EXITOSAMENTE", "success");
+                    global?.changeMenu(false);
+                }
+                else {
+                    global?.setAlert(true, "ERROR AL INGRESAR, CHEQUEE SUS DATOS", "error");
+                    setUserLogin({email: "", password: ""});
+                }
+            }, 2000);
+        }
+
     };
 
     //Desactivar boton si hay errores
@@ -93,7 +104,7 @@ export default function LoginMenu () {
             );
         }
         else return(
-            <Button onClick={() => login()} size="small" color="primary" variant="contained" startIcon={<LoginIcon/>} disabled={disableBtn()}>
+            <Button onClick={() => login()} size="small" color="primary" variant="contained" startIcon={<LoginIcon/>}>
                 <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='body1'>INGRESAR</Typography> 
             </Button>
         );
@@ -106,16 +117,16 @@ export default function LoginMenu () {
     return(
         <Box component={"form"}>
             <Box display={ 'flex'} justifyContent={"space-between"}>
-                <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='h6'>INGRESAR</Typography> 
+                <Typography sx={{marginLeft: "20px"}} color={"text.primary"} variant='h6'>INGRESAR</Typography> 
             </Box>
             <Divider sx={{backgroundColor: "#fafafa"}}/>
             <Box marginTop={"10px"}>
             <Box>
                 <Box>
-                    <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={"Email"} color="secondary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>
+                    <TextField error={formsError.emailError} helperText={formsError.emailMsg} fullWidth id="email" size="small" variant="filled" label={"Email"} color="primary" value={userLogin.email} onChange={(e) => handleUser("email", e.target.value)}/>
                 </Box>
                 <Box sx={{marginTop: 2}}>
-                    <TextField type="password" fullWidth id="password" size="small" variant="filled" label={"Contraseña"} color="secondary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
+                    <TextField type="password" fullWidth id="password" error={formsError.contra} size="small" variant="filled" label={"Contraseña"} color="primary" value={userLogin.password} onChange={(e) => handleUser("password", e.target.value)}/>
                 </Box>
                 <Box display={'flex'}>
                     <FormControlLabel control={<Checkbox checked={check} onChange={(e) => rememberUser(e)}/>} label="Recuerdame"/>

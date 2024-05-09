@@ -40,9 +40,9 @@ export default function NavBar () {
     const profile = () => {
         if (global?.isLogged){
             return (
-                <Box sx={{display: "flex"}}>
+                <Box sx={{display: "flex", justifyContent: "center"}}>
                     <AccountBoxIcon fontSize='large' sx={{marginTop:"2px", display: {sm:"block", xs: "none"}}}/>
-                    <Typography sx={{ typography: { sm: 'h4', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typography>
+                    <Typography sx={{ typography: { sm: 'h6', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typography>
                     <IconButton onClick={() => logoutBtn()} aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
                 </Box>
             );
@@ -62,7 +62,7 @@ export default function NavBar () {
         if(global?.isLogged){
             return(
                 <Box marginLeft={{sm:"50px", xs: "3px"}}>
-                    <Button onClick={() => navigation("/home")} sx={{marginRight: {sm:"35px", xs: "5px"}}} color='secondary' variant='text' size='large'>
+                    <Button onClick={() => navigation("/home")} color='secondary' variant='text' size='large'>
                         <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }} gutterBottom>Inicio</Typography>
                     </Button>
                     <Button onClick={() => navigation("/pacients")} color='secondary' variant='text' size='large' endIcon={<GroupsIcon fontSize='large'/>}>

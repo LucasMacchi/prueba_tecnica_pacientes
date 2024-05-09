@@ -2,9 +2,9 @@ import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import DataTable from './Table';
-import Typography from '@mui/material/Typography'
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { red } from "@mui/material/colors";
 import { nameRegex, numbersNoLimitRegex } from '../../Interfaces/interfaces';
 
 import { useContext, useState, useEffect } from 'react';
@@ -17,15 +17,6 @@ export default function Pacients () {
     const pacientCon = useContext(PacienteContext);
 
     const [search, setSearch] = useState("");
-
-    const tableColor = red[500];
-
-    const fabStyle = {
-        position: 'absolute',
-        bottom: 16,
-        right: 16,
-    };
-
 
     const addBtn = () => {
         global?.changeMenu("addPacient");
@@ -49,23 +40,22 @@ export default function Pacients () {
     };
 
     return(
-        <Box>
-            <Typography textAlign={"center"} style={{backgroundColor: tableColor}} color={"secondary"} variant='h4'>Buscar Pacientes</Typography>
-            <Box display={"flex"} justifyContent={"center"} style={{backgroundColor: tableColor}}>
+        <Box marginTop={"8px"}>
+            <Typography textAlign={"center"} color={"text.primary"} variant='h4'>Buscar Pacientes</Typography>
+            <Box display={"flex"} justifyContent={"center"} >
                 <Box  padding={2} width={"500px"}>
-                    <TextField color='secondary' label="Ingrese el nombre o DNI" fullWidth variant="outlined"
+                    <TextField color='primary' label="Ingrese el nombre o DNI" fullWidth variant="outlined"
                     value={search} onChange={(e) => setSearch(e.target.value)}/>
                 </Box>
             </Box>
-
+            <Box display={"flex"} justifyContent={"center"}>
+                <Button variant="contained" color='primary' onClick={() => addBtn()} endIcon={<AddIcon/>}>Agregar Pacientes</Button>
+            </Box>
             <Box display={"flex"} justifyContent={"center"}>
                 <Box  maxWidth={{ sm: '800px', xs: '350px' }} marginTop={"10px"} >
                     {noPacients()}
                 </Box>
-                <Fab sx={fabStyle} onClick={() => addBtn()} color='primary' variant='extended'>
-                    <AddIcon/>
-                    Agregar Paciente
-                </Fab>
+
             </Box>
         </Box>
 

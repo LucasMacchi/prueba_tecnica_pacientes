@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material";
-import { red } from "@mui/material/colors";
  
-const primary = red[500]
+const primary = "#001f45"
 const theme = createTheme({
     palette: {
         primary: {
@@ -11,10 +10,11 @@ const theme = createTheme({
             main: "#EEEEEE"
         },
         background:{
-            paper: "#212121"
+            paper: "#fafafa"
         },
         text:{
-            primary: "#EEEEEE",
+            primary: "#212121",
+            secondary: "#EEEEE"
             
         }
     },

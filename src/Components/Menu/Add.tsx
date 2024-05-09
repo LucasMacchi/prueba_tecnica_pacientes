@@ -148,41 +148,46 @@ export default function AddMenu () {
     const alertFn = (type: TtypeAlert, msg: string) => {
         global?.setAlert(true, msg, type)
     };
-
+    //uncion que crea un paciente
     const createPacient = () => {
-        const newPacient: IPaciente = {
-            nombre: pacient.nombre,
-            apellido: pacient.apellido,
-            dni: parseInt(pacient.dni),
-            localidad: pacient.localidad,
-            nacimiento: date.day+"/"+date.month+"/"+date.year,
-            alergias: pacient.alergias
-        };
-        if(global?.menu === "addPacient"){
-            const result = pacientCon?.getAddPacient(newPacient, pacientCon.pacientes);
-            if(result) alertFn("success", "Paciente creado exitosamente");
-            else alertFn("error", "Error al crear paciente");
+        if(disableBtn()) {
+            alertFn("error", "Ingrese todos los datos necesarios")
         }
-        else {
-            const result = pacientCon?.getEditPacient(newPacient, pacientCon.pacientes)
-            if(result) alertFn("success", "Paciente editado exitosamente")
-            else alertFn("error", "Error al editar paciente")
-        };
-        
-        setPacient({
-            nombre: "",
-            apellido: "",
-            dni: "",
-            localidad: "",
-            nacimiento: "",
-            alergias: ""
-        });
-        setDate({
-            day: "1",
-            month: "1",
-            year: "2000"
-        });
-        global?.changeMenu(false);
+        else{
+            const newPacient: IPaciente = {
+                nombre: pacient.nombre,
+                apellido: pacient.apellido,
+                dni: parseInt(pacient.dni),
+                localidad: pacient.localidad,
+                nacimiento: date.day+"/"+date.month+"/"+date.year,
+                alergias: pacient.alergias
+            };
+            if(global?.menu === "addPacient"){
+                const result = pacientCon?.getAddPacient(newPacient, pacientCon.pacientes);
+                if(result) alertFn("success", "Paciente creado exitosamente");
+                else alertFn("error", "Error al crear paciente");
+            }
+            else {
+                const result = pacientCon?.getEditPacient(newPacient, pacientCon.pacientes)
+                if(result) alertFn("success", "Paciente editado exitosamente")
+                else alertFn("error", "Error al editar paciente")
+            };
+            
+            setPacient({
+                nombre: "",
+                apellido: "",
+                dni: "",
+                localidad: "",
+                nacimiento: "",
+                alergias: ""
+            });
+            setDate({
+                day: "1",
+                month: "1",
+                year: "2000"
+            });
+            global?.changeMenu(false);    
+        }
 
     };
     //Estas condiciones desactivan el boton de crear al menos que se cumplan las condiciones
@@ -202,40 +207,40 @@ export default function AddMenu () {
     return (
         <Box component={"form"}>
             <Box display={ 'flex'} justifyContent={"space-between"}>
-                <Typography sx={{marginLeft: "20px"}} color={"secondary"} variant='h6'>{global?.menu === "editPacient" ? "Editar Paciente" : "Añadir Nuevo Paciente"}</Typography> 
+                <Typography  sx={{marginLeft: "20px"}} color={"text.primary"} variant='h6'>{global?.menu === "editPacient" ? "Editar Paciente" : "Añadir Nuevo Paciente"}</Typography> 
             </Box>
-            <Divider sx={{backgroundColor: "#fafafa"}}/>
+            <Divider/>
             <Box>
                 <Box display={'flex'} marginTop={"10px"}>
                     <TextField required={true} error={formsError.name} helperText={formsError.nameMsg} fullWidth id="nombre" size="small" 
-                    variant="filled" label={"Nombre/s"} color="secondary" value={pacient.nombre} onChange={(e) => handlePacient("nombre", e.target.value)}/>
+                    variant="filled" label={"Nombre/s"} color="primary" value={pacient.nombre} onChange={(e) => handlePacient("nombre", e.target.value)}/>
                     <TextField required={true} error={formsError.surname} helperText={formsError.surnameMsg} fullWidth id="apellido" size="small" 
-                    variant="filled" label={"Apellido/s"} color="secondary" value={pacient.apellido} onChange={(e) => handlePacient("apellido", e.target.value)}/>
+                    variant="filled" label={"Apellido/s"} color="primary" value={pacient.apellido} onChange={(e) => handlePacient("apellido", e.target.value)}/>
                 </Box>
                 <Box marginTop={"10px"}>
                     <TextField required={true} error={formsError.dni} helperText={formsError.dniMsg} fullWidth id="dni" size="small" 
-                    variant="filled" label={"DNI/CUIT"} color="secondary" value={pacient.dni} onChange={(e) => handlePacient("dni", e.target.value)}/>
+                    variant="filled" label={"DNI/CUIT"} color="primary" value={pacient.dni} onChange={(e) => handlePacient("dni", e.target.value)}/>
                 </Box>
-                <Typography marginTop={"10px"} variant='body2'>Fecha de Nacimiento</Typography>
+                <Typography color={"text.primary"} marginTop={"10px"} variant='body2'>Fecha de Nacimiento</Typography>
                 <Box marginTop={"10px"} display={"flex"}>
                     <TextField required={true} error={formsError.day} helperText={formsError.dayMsg} fullWidth id="day" size="small" 
-                    variant="filled" label={"Dia"} color="secondary" value={date.day} onChange={(e) => handleDate("day", e.target.value)}/>
+                    variant="filled" label={"Dia"} color="primary" value={date.day} onChange={(e) => handleDate("day", e.target.value)}/>
                     <TextField required={true} error={formsError.month} helperText={formsError.monthMsg} fullWidth id="month" size="small" 
-                    variant="filled" label={"Mes"} color="secondary" value={date.month} onChange={(e) => handleDate("month", e.target.value)}/>
+                    variant="filled" label={"Mes"} color="primary" value={date.month} onChange={(e) => handleDate("month", e.target.value)}/>
                     <TextField required={true} error={formsError.year} helperText={formsError.yearMsg} fullWidth id="year" size="small" 
-                    variant="filled" label={"Año"} color="secondary" value={date.year} onChange={(e) => handleDate("year", e.target.value)}/>
+                    variant="filled" label={"Año"} color="primary" value={date.year} onChange={(e) => handleDate("year", e.target.value)}/>
                 </Box>
                 <Box marginTop={"10px"}> 
                     <TextField required={true} error={formsError.localidad} helperText={formsError.localidadMsg} fullWidth id="localidad" size="small" 
-                    variant="filled" label={"Localidad"} color="secondary" value={pacient.localidad} onChange={(e) => handlePacient("localidad", e.target.value)}/>
+                    variant="filled" label={"Localidad"} color="primary" value={pacient.localidad} onChange={(e) => handlePacient("localidad", e.target.value)}/>
                 </Box>
                 <Box marginTop={"10px"}>
                     <TextField error={formsError.alergias} helperText={formsError.alergiasMsg} fullWidth id="alergias" size="small" 
-                    variant="filled" label={"Alergias"} color="secondary" value={pacient.alergias} onChange={(e) => handlePacient("alergias", e.target.value)}/>
+                    variant="filled" label={"Alergias"} color="primary" value={pacient.alergias} onChange={(e) => handlePacient("alergias", e.target.value)}/>
                 </Box>
                 <Box display={"flex"} justifyContent={"space-evenly"} marginTop={"50px"}>
                     <Button color="primary" variant="contained" onClick={() => exitMenu()}>CANCELAR</Button>
-                    <Button disabled={disableBtn()} color="primary" variant="contained" onClick={() => createPacient()}>{global?.menu === "editPacient" ? "EDITAR" : "CREAR"}</Button>
+                    <Button color="primary" variant="contained" onClick={() => createPacient()}>{global?.menu === "editPacient" ? "EDITAR" : "CREAR"}</Button>
                 </Box>
             </Box>
         </Box>

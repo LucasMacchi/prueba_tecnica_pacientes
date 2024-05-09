@@ -14,11 +14,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import InfoIcon from '@mui/icons-material/Info';
 import Pagination from '@mui/material/Pagination';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-
-//Color
-import { red, orange } from "@mui/material/colors";
  
 //Contexto y interfaces
 import { IPaciente } from '../../Interfaces/interfaces';
@@ -34,8 +29,9 @@ export default function DataTable () {
     //Este estado maneja el paginado
     const [page, setPage] = useState(1);
 
-    const tableColor = red[500];
-    const allergyColor = orange[900];
+    const tableColor = "#001f45";
+    const itemColor = "#EEEEEE"
+    const allergyColor = "#001f45";
 
     //Si un paciente tiene una alergia, le cambia el color
     const checkAllergy = (pacient: IPaciente): boolean => {
@@ -79,31 +75,30 @@ export default function DataTable () {
 
     return(
         <Box>
-            <TableContainer component={Paper} sx={{height: { sm: '500px', xs: '280px' }}} style={{backgroundColor: tableColor}}>
+            <TableContainer component={Paper} sx={{height: { sm: '400px', xs: '280px' }}} style={{backgroundColor: tableColor, padding: 3}}>
                 <Table size='medium' sx={{ maxWidth: "1000px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
                     <TableHead>
                         <TableRow>
                             <TableCell sortDirection={orderIcon()} align='left' sx={{display: { sm: 'flex', xs: 'block' }}}>
-                                <Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
-                                <TableSortLabel color='secondary' direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
-
+                                <Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
+                                <TableSortLabel sx={{color: "#EEEEEE !important"}} direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
                                 </TableCell>
-                            <TableCell align='left' ><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha de Nacimiento</Typography></TableCell>
-                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
-                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
+                            <TableCell align='left' ><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha de Nacimiento</Typography></TableCell>
+                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
+                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
                         </TableRow>
                     </TableHead>
-                    <TableBody sx={{height: { sm: '350px', xs: '160px' }}}>
+                    <TableBody >
                         {pacientCon?.paginated_pacients[page-1]?.map((p) => (
-                            <TableRow style={{backgroundColor: checkAllergy(p) ? allergyColor : tableColor}} key={p.dni}>
-                                <TableCell><Typography sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.apellido+", "+p.nombre}</Typography></TableCell>
-                                <TableCell><Typography sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.nacimiento}</Typography></TableCell>
-                                <TableCell><Typography sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.dni}</Typography></TableCell>
+                            <TableRow hover={true} style={{backgroundColor: checkAllergy(p) ? allergyColor : itemColor}} key={p.dni}>
+                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.apellido+", "+p.nombre}</Typography></TableCell>
+                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.nacimiento}</Typography></TableCell>
+                                <TableCell><Typography color={checkAllergy(p) ? "secondary" : "text.secondary"} sx={{ typography: { sm: 'body1', xs: 'caption' } }}>{p.dni}</Typography></TableCell>
                                 <TableCell>
                                     <Box display={'flex'}>
-                                        <IconButton onClick={() => detailsBtn(p)}><InfoIcon/></IconButton>
-                                        <IconButton onClick={() => editBtn(p.dni)}><EditNoteIcon/></IconButton>
-                                        <IconButton onClick={() => deleteBtn(p.dni)}><DeleteIcon/></IconButton>
+                                        <IconButton color="warning" onClick={() => detailsBtn(p)}><InfoIcon/></IconButton>
+                                        <IconButton color={checkAllergy(p) ? "secondary" : "primary"} onClick={() => editBtn(p.dni)}><EditNoteIcon/></IconButton>
+                                        <IconButton color="error" onClick={() => deleteBtn(p.dni)}><DeleteIcon/></IconButton>
                                     </Box>
                                 </TableCell>
                             </TableRow>
@@ -111,15 +106,13 @@ export default function DataTable () {
                         ))}
                     </TableBody>
                 </Table>
-                <Box display={"flex"} justifyContent={"center"} >
-                    <Pagination size='large' color='secondary' count={pacientCon?.paginated_pacients.length} 
-                    page={page} onChange={(e, v) => changePage(e, v)}/>
-                </Box>
-            </TableContainer>    
 
+            </TableContainer>    
+            <Box display={"flex"} justifyContent={"center"} >
+                    <Pagination size='large' color='primary' count={pacientCon?.paginated_pacients.length} 
+                    page={page} onChange={(e, v) => changePage(e, v)}/>
+            </Box>
                  
         </Box>
-
-
     );
 };

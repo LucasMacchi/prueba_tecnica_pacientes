@@ -48,8 +48,8 @@ export default function Menu () {
             <Paper>
                 <Box display={ 'flex'} justifyContent={"space-between"}>
                     <Box sx={{display: "flex"}}>
-                            <LocalHospitalIcon sx={{marginRight: "5px", marginTop: "2px"}}/>
-                            <Typography variant='h6' gutterBottom>ICC</Typography>
+                            <LocalHospitalIcon  sx={{marginRight: "5px", marginTop: "2px"}}/>
+                            <Typography  variant='h6' gutterBottom>ICC</Typography>
                     </Box>
                     <IconButton onClick={() => closeBtn()} aria-label='close'><CloseIcon color='primary'/></IconButton>
                 </Box>
