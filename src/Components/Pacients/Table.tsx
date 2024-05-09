@@ -75,7 +75,7 @@ export default function DataTable () {
 
     return(
         <Box >
-            <TableContainer component={Paper} sx={{height: { sm: '400px', xs: '280px' }, borderRadius: "20px"}} style={{backgroundColor: itemColor, padding: 3, border: "2px solid #CCCCCC"}}>
+            <TableContainer component={Paper} sx={{height: { sm: '350px', xs: '280px' }, borderRadius: "20px"}} style={{backgroundColor: itemColor, padding: 3, border: "2px solid #CCCCCC"}}>
                 <Table size='medium' sx={{ maxWidth: "1000px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
                     <TableHead>
                         <TableRow>
