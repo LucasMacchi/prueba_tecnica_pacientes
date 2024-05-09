@@ -40,8 +40,8 @@ export default function Home () {
 
     return(
         <Box  >
-            <Box display={{ sm: 'flex', xs: 'block' }}>
-                <Box marginTop={"40px"} marginLeft={{ sm: '10px', xs: '3px' }} marginRight={{ sm: '500px', xs: '3px' }} textAlign={{ sm: 'left', xs: 'center' }}>
+            <Box display={{ sm: 'flex', xs: 'block' }} justifyContent={"center"}>
+                <Box marginTop={"40px"} marginLeft={{ sm: '10px', xs: '3px' }} textAlign={{ sm: 'left', xs: 'center' }}>
                     <Typography sx={{typography: { sm: 'h2', xs: 'h6' }}}>{"Bienvenido, "+global?.user.username+"."}</Typography>
                     <Typography sx={{typography: { sm: 'h5', xs: 'caption' }}}>{"Chequee su correo, "+global?.user.email+", para nuevos turnos con sus pacientes y comunicados del hospital."}</Typography>
                     <Box marginTop={{ sm: '100px', xs: '20px' }} display={"flex"} justifyContent={"space-evenly"}>

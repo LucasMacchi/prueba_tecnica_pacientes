@@ -40,7 +40,7 @@ export default function NavBar () {
     const profile = () => {
         if (global?.isLogged){
             return (
-                <Box sx={{display: "flex", justifyContent: "center"}}>
+                <Box sx={{display: "flex", alignItems: "center"}}>
                     <AccountBoxIcon fontSize='large' sx={{marginTop:"2px", display: {sm:"block", xs: "none"}}}/>
                     <Typography sx={{ typography: { sm: 'h6', xs: 'body1' }, display: {sm:"block", xs: "none"} }} >{global.user.username}</Typography>
                     <IconButton onClick={() => logoutBtn()} aria-label='logout'><LogoutIcon color='secondary' fontSize='medium'/></IconButton>
