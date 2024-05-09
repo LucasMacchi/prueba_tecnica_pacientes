@@ -70,12 +70,12 @@ export default function DataTable () {
     const orderIcon = () => {
         if(pacientCon?.pacient_order ==="asc") return "asc"
         else return "desc"
-    }
+    };
 
     const changeOrd = () => {
         if(pacientCon?.pacient_order ==="asc") pacientCon.changeOrder("des", pacientCon.pacientes)
-        else pacientCon?.changeOrder("asc", pacientCon.pacientes)
-    }
+        else pacientCon?.changeOrder("asc", pacientCon.pacientes);
+    };
 
     return(
         <Box>
