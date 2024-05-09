@@ -44,7 +44,7 @@ export default function Pacients () {
     },[search]);
     //Cuando no se encuentran pacientes, se muestra un texto que lo comunica
     const noPacients = () => {
-        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No se encuentran pacientes.</Typography>);
+        if(!pacientCon?.paginated_pacients || pacientCon?.paginated_pacients[0].length < 1) return(<Typography sx={{typography: { sm: 'h2', xs: 'body1' }}}>No se han encontrado pacientes.</Typography>);
         else return (<DataTable/>);
     };
 
@@ -62,8 +62,9 @@ export default function Pacients () {
                 <Box  maxWidth={{ sm: '800px', xs: '350px' }} marginTop={"10px"} >
                     {noPacients()}
                 </Box>
-                <Fab sx={fabStyle} onClick={() => addBtn()} color='primary'>
+                <Fab sx={fabStyle} onClick={() => addBtn()} color='primary' variant='extended'>
                     <AddIcon/>
+                    Agregar Paciente
                 </Fab>
             </Box>
         </Box>

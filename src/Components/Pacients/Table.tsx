@@ -83,13 +83,14 @@ export default function DataTable () {
                 <Table size='medium' sx={{ maxWidth: "1000px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
                     <TableHead>
                         <TableRow>
-                            <TableCell sortDirection={orderIcon()} sx={{display: "flex"}}>
+                            <TableCell sortDirection={orderIcon()} align='left' sx={{display: { sm: 'flex', xs: 'block' }}}>
+                                <Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
                                 <TableSortLabel color='secondary' direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
-                                <Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Nombre</Typography>
+
                                 </TableCell>
-                            <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Fecha de Nacimiento</Typography></TableCell>
-                            <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>DNI</Typography></TableCell>
-                            <TableCell><Typography sx={{ typography: { sm: 'h6', xs: 'body2' } }}>Acciones</Typography></TableCell>
+                            <TableCell align='left' ><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha de Nacimiento</Typography></TableCell>
+                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
+                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody sx={{height: { sm: '350px', xs: '160px' }}}>

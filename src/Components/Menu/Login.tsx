@@ -64,12 +64,12 @@ export default function LoginMenu () {
     const login = () => {
         const result = global?.login(userLogin, check);
         setLoading(true);
+        navigation("/home");
         setTimeout(() => {
             setLoading(false);
             if(result){
                 global?.setAlert(true, "HA INGRESADO EXITOSAMENTE", "success");
                 global?.changeMenu(false);
-                navigation("/home");
             }
             else {
                 global?.setAlert(true, "ERROR AL INGRESAR, CHEQUEE SUS DATOS", "error");

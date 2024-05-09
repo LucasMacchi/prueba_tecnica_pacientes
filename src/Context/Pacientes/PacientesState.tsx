@@ -69,6 +69,7 @@ export default function PacientesState(props: IPropsChildren ) {
                 type: actions.PACIENT_ADD,
                 payload: newArray
             });
+            setPagination(newArray)
             return true
         } catch (error) {
             return false
