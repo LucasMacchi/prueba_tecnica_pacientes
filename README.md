@@ -14,9 +14,9 @@ Este proyecto busca crear un administrador de pacientes, donde se pueden, elimin
 
 Se usa React.Js, Typescript, Material UI y React-Router-Dom
 
-## Available Scripts
+## Scripts para ejecutar
 
-In the project directory, you can run:
+En la carpeta del projecto, deberas ejecutar los siguientes scripts:
 
 ### `npm start`
 
