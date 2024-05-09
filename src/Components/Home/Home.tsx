@@ -49,7 +49,10 @@ export default function Home () {
                         <Zoom in={true} style={{transitionDelay: '200ms'}}>
                             <Card variant="outlined" sx={{maxWidth: { sm: '400px', xs: '220px' }}}>
                                 <CardContent>
-                                    <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Pacientes <GroupsIcon/> </Typography>
+                                    <Box sx={{display: "flex", alignItems: "center"}}>
+                                        <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Pacientes  </Typography>
+                                        <GroupsIcon/>
+                                    </Box>
                                     <Divider sx={{backgroundColor: "#fafafa"}}/>
                                     <Typography sx={{typography: { sm: 'body1', xs: 'caption' }}}>
                                         {"Aquí podrá administrar, añadir,\neditar y eliminar los perfiles de sus pacientes. "}
@@ -65,7 +68,10 @@ export default function Home () {
                         <Zoom in={true} style={{transitionDelay: '400ms'}}>
                             <Card variant="outlined" sx={{maxWidth: { sm: '400px', xs: '220px' }, marginLeft: { sm: '30px', xs: '5px' }}}>
                                 <CardContent>
-                                    <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Cerrar Sesion <LogoutIcon/> </Typography>
+                                    <Box sx={{display: "flex", alignItems: "center"}}>
+                                        <LogoutIcon/>
+                                        <Typography sx={{typography: { sm: 'h6', xs: 'body1' }}}>Cerrar Sesion </Typography>
+                                    </Box>
                                     <Divider sx={{backgroundColor: "#fafafa"}}/>
                                     <Typography sx={{typography: { sm: 'body1', xs: 'caption' }}}>
                                         {"Si cierra sesión en este dispositvo, deberá ingresar sus datos nuevamente. "}
