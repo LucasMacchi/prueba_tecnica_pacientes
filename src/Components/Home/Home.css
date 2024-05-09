@@ -2,9 +2,16 @@
     width: 500px;
     border-radius: 10px;
 }
+.cardio_img {
+    width: 500px;
+    border-radius: 10px;
+}
 
 @media (max-width: 1000px) {
     .home_img{
         width: 200px;
+    }
+    .cardio_img {
+        display: none;
     }
 }

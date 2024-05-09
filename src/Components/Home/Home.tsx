@@ -5,6 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
+import Backdrop from '@mui/material/Backdrop';
 import {useNavigate} from 'react-router-dom';
 
 //icons
@@ -42,8 +43,9 @@ export default function Home () {
             <Box display={{ sm: 'flex', xs: 'block' }}>
                 <Box marginTop={"40px"} marginLeft={"20px"} textAlign={{ sm: 'left', xs: 'center' }}>
                     <img src='/Hospital.jpg' alt='hopital_img' className='home_img'/>
+                    <img src='/cardiologico.jpg' alt='cardilogico' className='cardio_img'/>
                 </Box>
-                <Box marginTop={"40px"} marginLeft={{ sm: '10px', xs: '3px' }} textAlign={{ sm: 'left', xs: 'center' }}>
+                <Box marginTop={"40px"} marginLeft={{ sm: '10px', xs: '3px' }} marginRight={{ sm: '500px', xs: '3px' }} textAlign={{ sm: 'left', xs: 'center' }}>
                     <Typography sx={{typography: { sm: 'h2', xs: 'h6' }}}>{"Bienvenido, "+global?.user.username}</Typography>
                     <Typography sx={{typography: { sm: 'h5', xs: 'caption' }}}>{"Chequee su correo, "+global?.user.email+", para nuevos turnos con sus pacientes y comunicados del hospital."}</Typography>
                     <Box marginTop={{ sm: '100px', xs: '20px' }} display={"flex"} justifyContent={"space-evenly"}>
@@ -81,6 +83,7 @@ export default function Home () {
 
                     </Box>
                 </Box>
+                <Box></Box>
             </Box> 
         </Box>
     );
