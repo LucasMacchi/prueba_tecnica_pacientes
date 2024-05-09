@@ -12,7 +12,11 @@ Este proyecto busca crear un administrador de pacientes, donde se pueden, elimin
 
 ## ¿Que Tecnologias usa?
 
-Se usa React.Js, Typescript, Material UI y React-Router-Dom
+Se usan las siguientes tecnologias:
+- React v18.3
+- Typescript v4.9
+- Material UI v5
+- React-Router-Dom v18.3
 
 ## Scripts para ejecutar
 
