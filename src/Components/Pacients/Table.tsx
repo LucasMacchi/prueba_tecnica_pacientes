@@ -30,7 +30,7 @@ export default function DataTable () {
     const [page, setPage] = useState(1);
 
     const tableColor = "#001f45";
-    const itemColor = "#EEEEEE"
+    const itemColor = "#FFFFFF"
     const allergyColor = "#001f45";
 
     //Si un paciente tiene una alergia, le cambia el color
@@ -74,19 +74,19 @@ export default function DataTable () {
     };
 
     return(
-        <Box>
-            <TableContainer component={Paper} sx={{height: { sm: '400px', xs: '280px' }}} style={{backgroundColor: tableColor, padding: 3}}>
+        <Box >
+            <TableContainer component={Paper} sx={{height: { sm: '400px', xs: '280px' }, borderRadius: "20px"}} style={{backgroundColor: itemColor, padding: 3, border: "2px solid #CCCCCC"}}>
                 <Table size='medium' sx={{ maxWidth: "1000px" }} padding={window.screen.width < 500 ? "none" : "normal"} aria-label="pacient-table" >
                     <TableHead>
                         <TableRow>
                             <TableCell sortDirection={orderIcon()} align='left' sx={{display: { sm: 'flex', xs: 'block' }}}>
-                                <Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
+                                <Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Nombre</Typography>
                                 <TableSortLabel sx={{color: "#EEEEEE !important"}} direction={orderIcon()} onClick={() => changeOrd()} active={true}/>
                                 </TableCell>
-                            <TableCell align='left' ><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha Nacimiento</Typography></TableCell>
-                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
-                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>¿Alergias?</Typography></TableCell>
-                            <TableCell align='left'><Typography color={"secondary"} sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
+                            <TableCell align='left' ><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Fecha Nacimiento</Typography></TableCell>
+                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>DNI</Typography></TableCell>
+                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>¿Alergias?</Typography></TableCell>
+                            <TableCell align='left'><Typography sx={{ typography: { sm: 'h6', xs: 'caption' } }}>Acciones</Typography></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody >
