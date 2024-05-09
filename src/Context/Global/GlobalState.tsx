@@ -41,7 +41,7 @@ export default function GlobalState(props: IPropsChildren){
             if(u.email === userToLog.email && u.password === userToLog.password) user = {username: u.username, email: u.email}
         });
 
-        if(user){
+        if(user.email){
             const logUser: IUser = {username: user.username, email: user.email}
             dispatch({
                 type: actions.GLOBAL_LOGIN,
